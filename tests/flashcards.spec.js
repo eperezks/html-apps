@@ -107,6 +107,64 @@ test.describe('Checkride Flashcards app', () => {
     await expect(page.locator('.progress')).toContainText('Card 1 of');
   });
 
+  test('Drill One Section: Next/Prev Section arrows move between sections without returning to Home', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
+    });
+    await page.goto(APP_URL);
+    const drillCard = page.locator('.mode-card', { hasText: 'Drill One Section' });
+    await drillCard.locator('select').selectOption({ label: 'Alpha' });
+    await drillCard.getByRole('button', { name: 'Start Drill' }).click();
+    await expect(page.locator('.eyebrow')).toContainText('Alpha');
+
+    await page.getByRole('button', { name: 'Next Section ›' }).click();
+    await expect(page.locator('.eyebrow')).toContainText('Bravo');
+    await expect(page.locator('.progress')).toContainText('Card 1 of');
+
+    await page.getByRole('button', { name: '‹ Prev Section' }).click();
+    await expect(page.locator('.eyebrow')).toContainText('Alpha');
+
+    // Wraps around at the ends, for continuous iteration.
+    await page.getByRole('button', { name: '‹ Prev Section' }).click();
+    await expect(page.locator('.eyebrow')).toContainText('Charlie');
+  });
+
+  test('Drill One Section: the section dropdown jumps directly to another section', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
+    });
+    await page.goto(APP_URL);
+    const drillCard = page.locator('.mode-card', { hasText: 'Drill One Section' });
+    await drillCard.locator('select').selectOption({ label: 'Alpha' });
+    await drillCard.getByRole('button', { name: 'Start Drill' }).click();
+
+    await page.locator('.section-nav select').selectOption({ label: 'Charlie' });
+    await expect(page.locator('.eyebrow')).toContainText('Charlie');
+  });
+
+  test('Review A Whole Section: Next/Prev Section arrows and dropdown switch sections in place', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
+    });
+    await page.goto(APP_URL);
+    const reviewCard = page.locator('.mode-card', { hasText: 'Review A Whole Section' });
+    await reviewCard.locator('select').selectOption({ label: 'Alpha' });
+    await reviewCard.getByRole('button', { name: 'Open Review Card' }).click();
+    await expect(page.getByRole('heading', { name: 'Alpha' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Next Section ›' }).click();
+    await expect(page.getByRole('heading', { name: 'Bravo' })).toBeVisible();
+
+    await page.locator('.section-nav select').selectOption({ label: 'Charlie' });
+    await expect(page.getByRole('heading', { name: 'Charlie' })).toBeVisible();
+  });
+
+  test('Quiz Me On Everything (mode "all") has no per-section nav, since it spans every section', async ({ page }) => {
+    await page.goto(APP_URL);
+    await page.getByRole('button', { name: 'Start Random Quiz' }).click();
+    await expect(page.locator('.section-nav')).toHaveCount(0);
+  });
+
   test('Review A Whole Section reveals and hides all responses at once', async ({ page }) => {
     await page.goto(APP_URL);
     const reviewCard = page.locator('.mode-card', { hasText: 'Review A Whole Section' });

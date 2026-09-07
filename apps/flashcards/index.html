@@ -158,6 +158,16 @@
     flex-wrap: wrap;
   }
 
+  .section-nav{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .section-nav select{ flex: 1; min-width: 160px; }
+  .section-nav button{ flex: none; white-space: nowrap; }
+
   select{
     flex: 1;
     min-width: 200px;
@@ -865,6 +875,31 @@
     return select;
   }
 
+  // Prev/Next + a jump-to-any-section dropdown, shared by the Drill and
+  // Review screens so switching sections doesn't require going back to
+  // Home. Cycles (wraps at both ends) since these screens are meant for
+  // working straight through everything.
+  function buildSectionNav(currentIdx, onChange){
+    var nav = el("div", "section-nav");
+    var prevBtn = el("button", "ghost", "‹ Prev Section");
+    prevBtn.type = "button";
+    prevBtn.addEventListener("click", function(){
+      onChange((currentIdx - 1 + SECTIONS.length) % SECTIONS.length);
+    });
+    var select = buildSectionSelect();
+    select.value = String(currentIdx);
+    select.addEventListener("change", function(){ onChange(Number(select.value)); });
+    var nextBtn = el("button", "ghost", "Next Section ›");
+    nextBtn.type = "button";
+    nextBtn.addEventListener("click", function(){
+      onChange((currentIdx + 1) % SECTIONS.length);
+    });
+    nav.appendChild(prevBtn);
+    nav.appendChild(select);
+    nav.appendChild(nextBtn);
+    return nav;
+  }
+
   function renderHome(){
     if (dataState === "loading"){
       app.appendChild(el("div", "empty-note", "Loading checklists…"));
@@ -1004,6 +1039,12 @@
 
     app.appendChild(bar);
 
+    if (state.mode === "section"){
+      app.appendChild(buildSectionNav(state.sectionIdx, function(newIdx){
+        go("quiz", { mode: "section", sectionIdx: newIdx });
+      }));
+    }
+
     var current = items[state.session.history[state.session.pointer]];
 
     var scene = el("div", "flip-scene");
@@ -1097,6 +1138,10 @@
     bar.appendChild(mid);
     bar.appendChild(el("div", "progress", sec.items.length + " items"));
     app.appendChild(bar);
+
+    app.appendChild(buildSectionNav(state.sectionIdx, function(newIdx){
+      go("review", { sectionIdx: newIdx });
+    }));
 
     var revealed = false;
     var card = el("div", "review-card");
