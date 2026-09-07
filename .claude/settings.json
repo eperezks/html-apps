@@ -6,7 +6,9 @@
       "Bash(npx playwright *)",
       "Bash(node -e ' *)",
       "Bash(git -C /Users/eperez/Documents/repos/html-apps status)",
-      "Bash(git -C /Users/eperez/Documents/repos/html-apps diff .claude/settings.json)"
+      "Bash(git -C /Users/eperez/Documents/repos/html-apps diff .claude/settings.json)",
+      "Bash(node --check /Users/eperez/Documents/repos/html-apps/apps/flashcards/index.html)",
+      "Bash(git -C /Users/eperez/Documents/repos/html-apps status --short)"
     ],
     "additionalDirectories": [
       "/Users/eperez/Documents/repos/html-apps/apps"

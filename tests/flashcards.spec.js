@@ -36,14 +36,18 @@ test.describe('Checkride Flashcards app', () => {
     expect(requested).toBe(true);
   });
 
-  test('falls back to the built-in deck set if the resources file is unavailable', async ({ page }) => {
+  test('shows a retry-able error if the resources file is unavailable (e.g. opened via file://)', async ({ page }) => {
     await page.route('**/apps/flashcards/resources/checkride-flashcards-config.json', (route) => {
       route.fulfill({ status: 404, body: 'not found' });
     });
 
     await page.goto(APP_URL);
-    // Give the failed fetch a moment to resolve and confirm nothing broke.
-    await page.waitForTimeout(300);
+    await expect(page.getByText("Couldn't Load Checklists")).toBeVisible();
+    await expect(page.getByText('Quiz Me On Everything')).toHaveCount(0);
+
+    // Once the file becomes reachable, Retry should recover into the normal home view.
+    await page.unroute('**/apps/flashcards/resources/checkride-flashcards-config.json');
+    await page.getByRole('button', { name: 'Retry' }).click();
     await expect(page.locator('.mode-card')).toHaveCount(3);
     await expect(page.locator('#headerStat')).toHaveText(/21 checklists/);
   });
@@ -62,20 +66,26 @@ test.describe('Checkride Flashcards app', () => {
     await expect(page.locator('.face.back .txt')).not.toBeEmpty();
   });
 
+  // These tests pick whichever section happens to be first in the config
+  // file rather than a hardcoded name — that file is meant to be edited
+  // (see resources/checkride-flashcards-config.json), so tests shouldn't
+  // assume specific section names survive.
   test('Drill One Section quizzes only the items in the chosen section', async ({ page }) => {
     await page.goto(APP_URL);
     const drillCard = page.locator('.mode-card', { hasText: 'Drill One Section' });
-    await drillCard.locator('select').selectOption({ label: 'Cabin' });
+    const firstOption = drillCard.locator('select option').first();
+    const sectionName = await firstOption.textContent();
+    await drillCard.locator('select').selectOption({ index: 0 });
     await drillCard.getByRole('button', { name: 'Start Drill' }).click();
 
-    await expect(page.locator('.eyebrow')).toContainText('Cabin');
+    await expect(page.locator('.eyebrow')).toContainText(sectionName);
     await expect(page.locator('.progress')).toContainText('Card 1 of');
   });
 
   test('Review A Whole Section reveals and hides all responses at once', async ({ page }) => {
     await page.goto(APP_URL);
     const reviewCard = page.locator('.mode-card', { hasText: 'Review A Whole Section' });
-    await reviewCard.locator('select').selectOption({ label: 'Cabin' });
+    await reviewCard.locator('select').selectOption({ index: 0 });
     await reviewCard.getByRole('button', { name: 'Open Review Card' }).click();
 
     const responses = page.locator('.row-resp');
@@ -94,6 +104,24 @@ test.describe('Checkride Flashcards app', () => {
     await page.getByRole('button', { name: 'Start Random Quiz' }).click();
     await page.getByRole('button', { name: '‹ Back' }).click();
     await expect(page.getByText('Quiz Me On Everything')).toBeVisible();
+  });
+
+  test('Reset to Original Checklists re-fetches the resources file', async ({ page }) => {
+    await page.goto(APP_URL);
+
+    let fetchCount = 0;
+    await page.route('**/apps/flashcards/resources/checkride-flashcards-config.json', (route) => {
+      fetchCount++;
+      route.continue();
+    });
+
+    await page.getByRole('button', { name: /Manage Sections/ }).click();
+    const resetBtn = page.getByRole('button', { name: 'Reset to Original Checklists' });
+    await resetBtn.click();
+    await page.getByRole('button', { name: 'Click again to confirm reset' }).click();
+
+    await expect(page.locator('.section-row').first()).toBeVisible();
+    expect(fetchCount).toBe(1);
   });
 
   test('Manage Sections view lists sections with edit/delete controls', async ({ page }) => {
