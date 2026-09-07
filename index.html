@@ -1,0 +1,1817 @@
+<link id="font-link" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<title>Checkride Flashcards</title>
+<style id="main-style">
+  :root{
+    --bg: #E9EDF2;
+    --panel: #DCE2E9;
+    --surface: #FFFFFF;
+    --surface-2: #EEF1F5;
+    --text: #16233A;
+    --text-muted: #5B6B82;
+    --accent: #C97D1D;
+    --accent-ink: #2E1C02;
+    --good: #1F8F79;
+    --good-text: #0C5F4D;
+    --border: #C7D0DA;
+    --border-strong: #A8B4C2;
+    --shadow: 0 1px 0 rgba(22,35,58,0.04), 0 8px 24px -12px rgba(22,35,58,0.18);
+    --flip-duration: 0.55s;
+    --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #0D141C;
+      --panel: #121B26;
+      --surface: #17212C;
+      --surface-2: #1E2A38;
+      --text: #E7ECF2;
+      --text-muted: #93A3B8;
+      --accent: #EFA53E;
+      --accent-ink: #1E1300;
+      --good: #49C7AC;
+      --good-text: #6BE2C6;
+      --border: #2B3949;
+      --border-strong: #3C4E62;
+      --shadow: 0 1px 0 rgba(0,0,0,0.3), 0 10px 28px -14px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #0D141C;
+    --panel: #121B26;
+    --surface: #17212C;
+    --surface-2: #1E2A38;
+    --text: #E7ECF2;
+    --text-muted: #93A3B8;
+    --accent: #EFA53E;
+    --accent-ink: #1E1300;
+    --good: #49C7AC;
+    --good-text: #6BE2C6;
+    --border: #2B3949;
+    --border-strong: #3C4E62;
+    --shadow: 0 1px 0 rgba(0,0,0,0.3), 0 10px 28px -14px rgba(0,0,0,0.6);
+  }
+  @media (prefers-reduced-motion: reduce){
+    :root{ --flip-duration: 0.01s; }
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 28px 16px 48px;
+  }
+  .shell{
+    width: 100%;
+    max-width: 760px;
+  }
+
+  /* ---------- Header ---------- */
+  .masthead{
+    display:flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding: 4px 4px 18px;
+    border-bottom: 2px solid var(--border-strong);
+    margin-bottom: 22px;
+  }
+  .masthead h1{
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 38px);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+    text-wrap: balance;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .masthead .plane{ color: var(--accent); }
+  .masthead .stat{
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.5;
+  }
+  @media (max-width: 480px){
+    .masthead .stat{ text-align: left; }
+    .head-actions{ align-items: flex-start; }
+  }
+
+  /* ---------- Home: mode switches ---------- */
+  .modes{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .mode-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 18px 20px 20px;
+    box-shadow: var(--shadow);
+  }
+  .mode-card.alt{ border-top-color: var(--good); }
+  .mode-card .mode-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom: 6px;
+  }
+  .mode-index{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--surface);
+    background: var(--accent);
+    width: 22px; height: 22px;
+    border-radius: 5px;
+    display: flex; align-items:center; justify-content:center;
+    flex: none;
+    font-weight: 600;
+  }
+  .mode-card.alt .mode-index{ background: var(--good); }
+  .mode-card h2{
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .mode-card p{
+    margin: 0 0 14px;
+    color: var(--text-muted);
+    font-size: 14.5px;
+    max-width: 60ch;
+  }
+  .mode-row{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  select{
+    flex: 1;
+    min-width: 200px;
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: 7px;
+    padding: 10px 12px;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 14px;
+  }
+  select:focus-visible, button:focus-visible, .flip-card:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  button{
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 7px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface-2);
+    color: var(--text);
+    padding: 10px 16px;
+    cursor: pointer;
+  }
+  button:hover{ border-color: var(--accent); }
+  button.primary{
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+  button.primary:hover{ filter: brightness(1.05); }
+  button.ghost{
+    background: transparent;
+    border-color: transparent;
+    color: var(--text-muted);
+    padding: 10px 8px;
+  }
+  button.ghost:hover{ color: var(--text); border-color: transparent; }
+  button:disabled{ opacity: 0.4; cursor: not-allowed; }
+
+  /* ---------- Session header ---------- */
+  .session-bar{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .session-bar .eyebrow-block{ min-width: 0; }
+  .eyebrow{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .eyebrow .dot{ color: var(--accent); padding: 0 6px; }
+  .tagline{
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .progress{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* ---------- Flip card ---------- */
+  .flip-scene{
+    perspective: 1600px;
+    margin-bottom: 16px;
+  }
+  .flip-card{
+    position: relative;
+    min-height: 260px;
+    cursor: pointer;
+  }
+  .flip-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    transition: transform var(--flip-duration) cubic-bezier(.4,.2,.2,1);
+    transform-style: preserve-3d;
+  }
+  .flip-card.flipped .flip-inner{ transform: rotateY(180deg); }
+  .face{
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .face.front{
+    background: var(--surface);
+  }
+  .face.back{
+    background: var(--surface);
+    border-color: var(--good);
+    transform: rotateY(180deg);
+  }
+  .face .face-label{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: auto;
+    padding-bottom: 14px;
+  }
+  .face.back .face-label{ color: var(--good); }
+  .face-content{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex: 1;
+    text-align: center;
+  }
+  .face-content .txt{
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-size: clamp(19px, 4vw, 25px);
+    line-height: 1.35;
+  }
+  .face.back .face-content .txt{
+    color: var(--good-text);
+    background: color-mix(in srgb, var(--good) 16%, transparent);
+    padding: 4px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  .flip-hint{
+    text-align:center;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 10px;
+  }
+
+  .controls{
+    display:flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  .controls button{ min-width: 92px; }
+
+  /* ---------- Review card (whole section) ---------- */
+  .review-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--good);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 22px;
+  }
+  .review-list{
+    max-height: 48vh;
+    overflow-y: auto;
+    padding-right: 6px;
+    margin-top: 8px;
+  }
+  .review-row{
+    display:flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 7px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .review-row:last-child{ border-bottom: none; }
+  .row-num{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    width: 20px;
+    flex: none;
+  }
+  .row-item{
+    font-size: 14.5px;
+    white-space: nowrap;
+  }
+  .row-leader{
+    flex: 1;
+    border-bottom: 1px dotted var(--border-strong);
+    margin: 0 2px;
+    transform: translateY(-4px);
+    min-width: 16px;
+  }
+  .row-resp{
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 13.5px;
+    white-space: nowrap;
+    color: var(--text-muted);
+  }
+  .review-card.revealed .row-resp{ color: var(--good-text); font-weight: 700; }
+  .review-card.revealed .row-resp::before{ content: ""; }
+  .review-toggle{
+    display:flex;
+    justify-content: center;
+    margin-top: 14px;
+  }
+
+  .hidden{ display:none !important; }
+
+  @media (max-width: 480px){
+    .row-item{ white-space: normal; }
+    .row-resp{ white-space: normal; text-align: right; }
+  }
+
+  /* ---------- Header: manage link + save status ---------- */
+  .head-actions{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .manage-link{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+    padding: 2px 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--border-strong);
+  }
+  .manage-link:hover{ text-decoration-color: var(--accent); }
+
+  /* ---------- Manage view ---------- */
+  .utility-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .status-pill{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .status-pill.on{ border-color: var(--good); color: var(--good-text); }
+  .deck-group{ margin-bottom: 20px; }
+  .deck-group-title{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .section-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .section-row .info{ min-width: 0; }
+  .section-row .info .name{
+    font-weight: 600;
+    font-size: 14.5px;
+  }
+  .section-row .info .meta{
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .section-row .row-actions{
+    display: flex;
+    gap: 8px;
+    flex: none;
+  }
+  .section-row .row-actions button{ padding: 8px 12px; font-size: 13px; }
+  button.danger{
+    background: transparent;
+    border-color: #B5493A;
+    color: #B5493A;
+  }
+  button.danger:hover{ background: #B5493A; color: #FFF; }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) button.danger{ border-color: #E8776A; color: #E8776A; }
+    :root:not([data-theme="light"]) button.danger:hover{ background: #E8776A; color: #17212C; }
+  }
+  :root[data-theme="dark"] button.danger{ border-color: #E8776A; color: #E8776A; }
+  :root[data-theme="dark"] button.danger:hover{ background: #E8776A; color: #17212C; }
+  button.danger-text{ color: #B5493A; border-color: transparent; background: transparent; }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) button.danger-text{ color: #E8776A; }
+  }
+  :root[data-theme="dark"] button.danger-text{ color: #E8776A; }
+
+  .empty-note{
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 24px 4px;
+    text-align: center;
+  }
+
+  /* ---------- Section add/edit form ---------- */
+  .section-form{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 22px;
+  }
+  .field{ margin-bottom: 14px; }
+  .field-label{
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .field input[type="text"]{
+    width: 100%;
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: 7px;
+    padding: 10px 12px;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 14px;
+  }
+  .item-rows{ display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+  .item-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 8px;
+    align-items: center;
+  }
+  .item-row input{
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: 7px;
+    padding: 9px 10px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+  }
+  .row-remove{
+    padding: 6px 10px !important;
+    color: var(--text-muted);
+    font-size: 16px !important;
+    line-height: 1;
+  }
+  @media (max-width: 520px){
+    .item-row{ grid-template-columns: 1fr; }
+    .row-remove{ justify-self: end; }
+  }
+  .form-error{
+    color: #B5493A;
+    font-size: 13px;
+    margin: 10px 0;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .form-error{ color: #E8776A; }
+  }
+  :root[data-theme="dark"] .form-error{ color: #E8776A; }
+  .form-actions{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .import-preview{
+    background: var(--surface-2);
+    border: 1px dashed var(--border-strong);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 10px;
+    font-size: 13.5px;
+  }
+  .import-preview .form-actions{ border-top: none; padding-top: 10px; margin-top: 10px; }
+</style>
+
+<div class="shell">
+  <header class="masthead">
+    <h1><span class="plane">&#9992;</span> Checkride Flashcards</h1>
+    <div class="head-actions">
+      <div class="stat" id="headerStat"></div>
+      <button type="button" class="ghost manage-link" id="manageBtn">&#9881; Manage Sections</button>
+    </div>
+  </header>
+  <main id="app"></main>
+</div>
+
+<script type="application/json" id="decks-data"></script>
+<script id="main-script">
+(function(){
+  "use strict";
+
+  // ---------------------------------------------------------------
+  // Factory data: the 21 checklist decks transcribed from the pilot's
+  // original study set. Used as the starting point on first load, and
+  // to restore via "Reset to Original Checklists". The working copy
+  // the app actually reads/writes is DECKS, loaded from (in order)
+  // the embedded #decks-data tag, this browser's local storage, or —
+  // if neither exists yet — a clone of FACTORY_DECKS.
+  // ---------------------------------------------------------------
+  var FACTORY_DECKS = [
+    { deck: "Deck 1 — Pre-Flight Inspection", sections: [
+      { name: "Cabin", items: [
+        ["Inspection Status","Check"],
+        ["All Covers, Cowl Plugs, & Pitot Cover","Remove"],
+        ["Windshields","Check"],
+        ["Hobbs / Tach / VOR Check","Check"],
+        ["Documents (AROW)","Check"],
+        ["Control Lock","Remove, put in left pocket"],
+        ["Flight Controls","Free & Correct"],
+        ["Fuel Shut-Off Valve","IN"],
+        ["Fuel Selector","BOTH"],
+        ["Trim Tab","Set Take-Off"],
+        ["Alt Static","Check"],
+        ["Panel and Glare Shields","OFF (counterclockwise)"],
+        ["Circuit Breakers","IN"],
+        ["ALL Electrical Switches (except BCN)","OFF"],
+        ["Ignition Switch","OFF"],
+        ["MASTER Switch","ON"],
+        ["Flaps","Extend"],
+        ["Volts (-24V)","Check"],
+        ["Fuel Quantity","Check"],
+        ["Annunciator Panel","Test lights working"],
+        ["AVIONICS Master","ON"],
+        ["Avionics Cooling Fan","Verify ON"],
+        ["AVIONICS Master","OFF"],
+        ["Pitot Heat","Check as necessary"],
+        ["Exterior Lights","Check"],
+        ["MASTER Switch","OFF"]
+      ]},
+      { name: "Exterior — Aft Fuselage & Empennage", items: [
+        ["Baggage Door","Check & Secure"],
+        ["Fuselage (left side and under left side)","Check"],
+        ["Horizontal Stabilizer (left side)","Check"],
+        ["Elevator (left side)","Secure & Free"],
+        ["Vertical Stabilizer (left side)","Check"],
+        ["Beacon & Position Lights","Check"],
+        ["Rudder","Secure & Free"],
+        ["Tail Tie-down","Remove"],
+        ["Tail Skid","Check for marks"],
+        ["Vertical Stabilizer (right side)","Check"],
+        ["Elevator (right side)","Secure & Free"],
+        ["Trim Tab","Secure"],
+        ["Horizontal Stabilizer (right side)","Check"],
+        ["Fuselage (right side and under right side)","Check"],
+        ["Nav/Com Antennas","Check"],
+        ["ELT Antenna","Check"]
+      ]},
+      { name: "Right Wing", items: [
+        ["Wing Flaps","Strain (5 sumps)"],
+        ["Wing Flaps","Secure"],
+        ["Wing Tip & Leading Edge","Secure & Free"],
+        ["Tie-down Rope","Check"],
+        ["Main Landing Gear Tire & Brake","Remove"],
+        ["Main Landing Gear Tire & Brake","Check condition, pressure"],
+        ["Fuel Quantity (verify with fuel stick)","Visual"],
+        ["Fuel Cap","Secure"]
+      ]},
+      { name: "Engine & Nose", items: [
+        ["Fuselage Fuel Sump","Drain (sump 3 places)"],
+        ["Oil Level","Check (5–6 qts)"],
+        ["Cowling","Secure"],
+        ["Propeller & Spinner","Condition & Security"],
+        ["Air Inlets","Unobstructed"],
+        ["Air Filters","Unobstructed"],
+        ["Alternator Belt","Secure"],
+        ["Cowling Interior","Check condition"],
+        ["Nose Wheel Assembly","Condition & Security"],
+        ["Static Port","Unobstructed"]
+      ]},
+      { name: "Left Wing", items: [
+        ["Pitot Tube","Unobstructed"],
+        ["Tie-down Rope","Remove"],
+        ["Fuel Tank Vent","Unobstructed"],
+        ["Stall Warning Opening","Unobstructed"],
+        ["Wing Leading Edge & Tip","Check"],
+        ["Aileron","Secure & Free"],
+        ["Flap","Secure"],
+        ["Main Landing Gear Tire & Brake","Check condition, pressure"],
+        ["Wing Fuel Sumps","Drain (5 sumps)"],
+        ["Fuel Quantity (verify with fuel stick)","Visual"],
+        ["Fuel Cap","Secure"]
+      ]},
+      { name: "Before Start", items: [
+        ["Preflight Inspection","Complete"],
+        ["Passenger Briefing","Complete"],
+        ["Seats & Belts","Upright & Secure"],
+        ["Beacon","ON"],
+        ["Brakes","Test & Hold"]
+      ]}
+    ]},
+
+    { deck: "Deck 2 — Engine Start", sections: [
+      { name: "Engine Start", items: [
+        ["Key","In Ignition Switch"],
+        ["Master Switch","ON"],
+        ["Mixture","Idle Cut Off"]
+      ]},
+      { name: "Prime The Engine", tagline: "As Required", items: [
+        ["Throttle","Open 1 inch"],
+        ["Auxiliary Fuel Pump","ON"],
+        ["Mixture","RICH until positive fuel flow in warm temps / longer for cold temps"],
+        ["Mixture","IDLE CUT OFF"],
+        ["Auxiliary Fuel Pump","OFF"]
+      ]},
+      { name: "Starting", items: [
+        ["Throttle","Set no more than 1/8 inch"],
+        ["Area","CLEAR!"],
+        ["Ignition","Engage until engine starts"],
+        ["Mixture as Engine Starts","Advance smoothly"],
+        ["Throttle","1000 RPM MAX"],
+        ["Oil Pressure","Check Alive"],
+        ["Ammeter","Verify Charging"],
+        ["Flaps Up","Check Ammeter Discharge"],
+        ["Mixture","Lean (to increase RPM)"],
+        ["Volts","27.0–28.4 V"],
+        ["Avionics Master","ON"],
+        ["Transponder","ALT"]
+      ]}
+    ]},
+
+    { deck: "Deck 3 — Before Taxi", sections: [
+      { name: "Before Taxi", items: [
+        ["Clocks","Check/Set"],
+        ["Weather Information","Obtain"],
+        ["Altimeter","Set"],
+        ["COM 1 / COM 2","Set/Check"],
+        ["NAV and GPS","Set/Check"],
+        ["Autopilot","OFF"],
+        ["Clearance","Obtain"],
+        ["Transponder","Set"],
+        ["Brakes","Idle Motion Check"]
+      ]}
+    ]},
+
+    { deck: "Deck 4 — Taxi (IFR)", sections: [
+      { name: "Taxi (IFR)", items: [
+        ["Compass","Free & Correct"],
+        ["Airspeed Indicator","Reads Zero"],
+        ["Attitude Indicator","Leans less than 5°"],
+        ["Altimeter","Set & within 75'"],
+        ["Turn Coordinator / Inclinometer","Free & Correct"],
+        ["Directional Gyro","Free & Correct"],
+        ["Vertical Speed Indicator","Note position"]
+      ]}
+    ]},
+
+    { deck: "Deck 5 — Fire During Engine Start", sections: [
+      { name: "If Engine Starts", items: [
+        ["Mixture","Idle Cut Off"],
+        ["Fuel Shut-Off Valve","Pull Out (Off)"],
+        ["Magnetos and Master","OFF"],
+        ["After securing engine","Evacuate Cabin"]
+      ]},
+      { name: "If Engine Doesn't Start", items: [
+        ["Throttle","FULL"],
+        ["Mixture","Idle Cut Off"],
+        ["Fuel Shut-Off Valve","Pull Out (Off)"],
+        ["Fuel Pump","OFF"],
+        ["Magnetos and Master","OFF"],
+        ["Fire Extinguisher","Obtain"],
+        ["After securing","Evacuate Cabin"]
+      ]}
+    ]},
+
+    { deck: "Deck 6 — Engine Runup", sections: [
+      { name: "Engine Runup", items: [
+        ["Nose Wheel","Straight"],
+        ["Brakes","Set"],
+        ["Run-up Area","Free of Debris"],
+        ["Field Conditions","Free & Correct"],
+        ["Oil Temperature","Off the bottom"],
+        ["Mixture","RICH"],
+        ["Throttle","1800 RPM"],
+        ["Fuel Quantity","As expected"],
+        ["Oil Temp","Off the bottom peg"],
+        ["Oil Pressure","In Green Arc"],
+        ["EGT","Check"],
+        ["Fuel Flow","Check"],
+        ["Ammeter","Check (if installed)"],
+        ["Magnetos","Check"],
+        ["Magneto check limits","Max drop 150; max difference 50"],
+        ["Throttle","Idle check, then 1000 RPM"],
+        ["Mixture","Lean"],
+        ["Throttle Friction","Adjust"],
+        ["Flaps","0° to 10° for Take-Off"],
+        ["Doors","Secure"]
+      ]}
+    ]},
+
+    { deck: "Deck 7 — IFR Checks", sections: [
+      { name: "IFR Checks", items: [
+        ["Departure Procedure","Brief"],
+        ["RAIM","Check"],
+        ["Pitot Heat","As required"]
+      ]}
+    ]},
+
+    { deck: "Deck 8 — Takeoff", sections: [
+      { name: "Take Off", tagline: "Lights, Camera, Action", items: [
+        ["Strobes & Landing Light","ON"],
+        ["Transponder","ALTITUDE"],
+        ["Mixture","RICH"],
+        ["Time","Start Clock"],
+        ["Heading Indicator","Agrees with RUNWAY"],
+        ["Throttle","Full Open"],
+        ["Elevator Control","Lift Nose Wheel"]
+      ]}
+    ]},
+
+    { deck: "Deck 9 — Climb", sections: [
+      { name: "Climb", items: [
+        ["Airspeed","Vy — Best Rate of Climb"],
+        ["System Gauges","MONITOR during climb"]
+      ]}
+    ]},
+
+    { deck: "Deck 10 — Cruise (Top of Climb)", sections: [
+      { name: "Cruise (Top of Climb)", tagline: "Pitch, Power, Trim", items: [
+        ["Landing Light","OFF"],
+        ["Power (per POH)","65% BHP"],
+        ["Mixture (for any altitude)","LEAN 50° rich of peak EGT"],
+        ["Elevator Trim","SET to relieve control forces"],
+        ["System Gauges","MONITOR during cruise"]
+      ]}
+    ]},
+
+    { deck: "Deck 11 — Approach (IFR)", sections: [
+      { name: "Approach (IFR)", tagline: "WIRE", items: [
+        ["Weather","ATIS/ASOS/AWOS — Obtain"],
+        ["Instruments","Altimeter/DG — Set"],
+        ["Radios","COM/NAV/GPS/MRK BCN — Set and identify"],
+        ["Environment","Approach Plate — systematically verify and brief"]
+      ]}
+    ]},
+
+    { deck: "Deck 12 — Descent (Top of Descent)", sections: [
+      { name: "Descent (Top of Descent)", items: [
+        ["Power","SET"],
+        ["Mixture","As Required"],
+        ["Weather (ATIS/ASOS/AWOS)","Obtain"],
+        ["Altimeters","Set"],
+        ["Crosswind Component","Evaluate"],
+        ["Fuel Selector","Both"],
+        ["Landing Light","ON"]
+      ]}
+    ]},
+
+    { deck: "Deck 13 — Before Landing", sections: [
+      { name: "Before Landing", items: [
+        ["Mixture","RICH"],
+        ["Seats & Belts","Upright & Secure"],
+        ["Autopilot","OFF"]
+      ]}
+    ]},
+
+    { deck: "Deck 14 — Landing", sections: [
+      { name: "Landing", items: [
+        ["Wing Flaps","As Desired"],
+        ["Airspeed — Flaps Up","65–75 KIAS"],
+        ["Airspeed — Flaps Down","60–70 KIAS"],
+        ["Touchdown","MAIN WHEELS first"],
+        ["Landing Roll","Lower Nose Wheel Gently"],
+        ["Braking","Minimum Required"]
+      ]}
+    ]},
+
+    { deck: "Deck 15 — Go-Around", sections: [
+      { name: "Go-Around", items: [
+        ["Throttle","FULL OPEN"],
+        ["Flaps","RETRACT 20° → 10° → 0°"],
+        ["Climb","Speed as required"]
+      ]}
+    ]},
+
+    { deck: "Deck 16 — After Landing", sections: [
+      { name: "After Landing — Clear of Runway and Stopped", items: [
+        ["Flaps","Retract"],
+        ["Mixture","LEAN"],
+        ["Trim","Set for Takeoff"],
+        ["Landing Light & Strobes","OFF"],
+        ["Pitot Heat","OFF"]
+      ]}
+    ]},
+
+    { deck: "Deck 17 — Parking", sections: [
+      { name: "Parking", items: [
+        ["All Lights (except beacon)","OFF"],
+        ["Throttle","1000 RPM"],
+        ["Transponder","1200"],
+        ["Avionics Master","OFF"],
+        ["Mixture","Idle — cut off"],
+        ["Magnetos (Ignition)","OFF, then remove key"],
+        ["Master Switch","OFF"],
+        ["Fuel Selector","Both"],
+        ["Control Lock","Install"],
+        ["Hobbs & Tach","Record"],
+        ["Covers","As Required"],
+        ["Chock/Tie-down","Required"],
+        ["Tail Skid","Check for marks"],
+        ["Tires","Check condition"]
+      ]}
+    ]},
+
+    { deck: "Deck 18 — Power Loss", sections: [
+      { name: "Power Loss", items: [
+        ["Airspeed — Best Glide","65 KIAS"],
+        ["Best Place to Land","Locate"],
+        ["Fuel Selector","Both"],
+        ["Fuel Shut-Off Valve","In (On)"],
+        ["Mixture","Full Rich"],
+        ["Throttle","Full Forward"],
+        ["Magnetos","BOTH"],
+        ["Fuel Pump","On"],
+        ["Master Switch","Check On"],
+        ["Starter (if propeller stopped)","Engage"]
+      ]}
+    ]},
+
+    { deck: "Deck 19 — If No Restart", sections: [
+      { name: "If No Restart — Emergency Landing", items: [
+        ["Squawk","7700"],
+        ["Communicate on Radio","121.5"],
+        ["Mixture","Idle Cut-Off"],
+        ["Fuel Shut-Off Valve","OUT (Off)"],
+        ["Ignition Switch","OFF"],
+        ["Flaps","As required"],
+        ["Fuel Pump","OFF"],
+        ["Fuel Selector","OFF"],
+        ["Door","Unlatch"],
+        ["Master","Off when landing assured"],
+        ["Landing Speed","60 KIAS"]
+      ]}
+    ]},
+
+    { deck: "Deck 20 — Electrical Fire", sections: [
+      { name: "Electrical Fire", items: [
+        ["Master Switch","OFF"],
+        ["Electrical Switches (except magnetos)","OFF"],
+        ["Cabin Heat & Air","OFF"],
+        ["Circuit Breakers","Check for faulty equipment, but don't reset"]
+      ]},
+      { name: "If Fire Is Extinguished", items: [
+        ["Essential Equipment","Turn ON one at a time"],
+        ["Landing","Land as soon as practical"]
+      ]}
+    ]},
+
+    { deck: "Deck 21 — Engine Fire in Flight", sections: [
+      { name: "Engine Fire in Flight", items: [
+        ["Fuel Shut-Off Valve","OUT (Off)"],
+        ["Mixture","Idle Cut-Off"],
+        ["Throttle","Closed"],
+        ["Master","OFF"],
+        ["Cabin Heat & Air","OFF"],
+        ["Airspeed","Highest permissible to extinguish fire"],
+        ["Emergency Landing","Land"]
+      ]}
+    ]}
+  ];
+
+  var STORAGE_KEY = "checkride-flashcards:decks:v1";
+
+  function deepClone(x){ return JSON.parse(JSON.stringify(x)); }
+
+  // Structural check before trusting any data that didn't come from
+  // FACTORY_DECKS (an embedded snapshot, local storage, or an imported
+  // file) — bad shape falls back rather than breaking the app.
+  function validateDecks(data){
+    if (!Array.isArray(data) || data.length === 0) return false;
+    for (var i = 0; i < data.length; i++){
+      var d = data[i];
+      if (!d || typeof d.deck !== "string" || !d.deck.trim()) return false;
+      if (!Array.isArray(d.sections) || d.sections.length === 0) return false;
+      for (var j = 0; j < d.sections.length; j++){
+        var s = d.sections[j];
+        if (!s || typeof s.name !== "string" || !s.name.trim()) return false;
+        if (!Array.isArray(s.items) || s.items.length === 0) return false;
+        for (var k = 0; k < s.items.length; k++){
+          var it = s.items[k];
+          if (!Array.isArray(it) || it.length !== 2) return false;
+          if (typeof it[0] !== "string" || typeof it[1] !== "string") return false;
+          if (!it[0].trim() || !it[1].trim()) return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function countDecks(data){
+    var sections = 0, items = 0;
+    data.forEach(function(d){
+      sections += d.sections.length;
+      d.sections.forEach(function(s){ items += s.items.length; });
+    });
+    return { decks: data.length, sections: sections, items: items };
+  }
+
+  // Load order: data embedded in this page (set by a previous publish
+  // of this same artifact) > this browser's local storage (the
+  // downloaded standalone file, or a view that couldn't publish) >
+  // the built-in factory checklists.
+  function loadInitialDecks(){
+    try {
+      var tag = document.getElementById("decks-data");
+      var raw = tag && tag.textContent.trim();
+      if (raw){
+        var embedded = JSON.parse(raw);
+        if (validateDecks(embedded)) return embedded;
+      }
+    } catch (e){ /* fall through */ }
+    try {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      if (stored){
+        var parsed = JSON.parse(stored);
+        if (validateDecks(parsed)) return parsed;
+      }
+    } catch (e){ /* fall through */ }
+    return deepClone(FACTORY_DECKS);
+  }
+
+  var DECKS = loadInitialDecks();
+
+  // ---------------------------------------------------------------
+  // Flatten DECKS into a lookup used by every study mode. Re-run
+  // whenever DECKS changes (add/edit/delete/import/reset a section).
+  // ---------------------------------------------------------------
+  var SECTIONS = [];   // { idx, deckName, name, tagline, items:[[f,b]] }
+  var ALL_ITEMS = [];  // { deckName, sectionName, tagline, front, back }
+
+  function rebuildIndex(){
+    SECTIONS = [];
+    ALL_ITEMS = [];
+    DECKS.forEach(function(deck){
+      deck.sections.forEach(function(sec){
+        var secIdx = SECTIONS.length;
+        SECTIONS.push({
+          idx: secIdx,
+          deckName: deck.deck,
+          name: sec.name,
+          tagline: sec.tagline || "",
+          items: sec.items
+        });
+        sec.items.forEach(function(pair){
+          ALL_ITEMS.push({
+            deckName: deck.deck,
+            sectionName: sec.name,
+            tagline: sec.tagline || "",
+            front: pair[0],
+            back: pair[1]
+          });
+        });
+      });
+    });
+    document.getElementById("headerStat").textContent =
+      DECKS.length + " checklists · " + SECTIONS.length + " sections · " + ALL_ITEMS.length + " items";
+  }
+  rebuildIndex();
+
+  function saveLocal(){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(DECKS)); }
+    catch (e){ /* storage unavailable or full — the embedded/publish copy still covers it */ }
+  }
+
+  // ---------------------------------------------------------------
+  // Optional runtime capabilities. When this page is opened via its
+  // published claude.ai link, "artifact" lets a save republish this
+  // whole page with the edited data baked in, so every device that
+  // opens the same link sees it too. Neither capability exists when
+  // this file is opened on its own (double-clicked, or as the
+  // downloaded copy) — the app falls back to this browser's local
+  // storage automatically in that case.
+  // ---------------------------------------------------------------
+  var ART = null;
+  var DL = null;
+  (function bootstrapCapabilities(){
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    window.claude.use("artifact").then(function(ns){ ART = ns; if (state.view === "manage") render(); }).catch(function(){});
+    window.claude.use("downloads").then(function(ns){ DL = ns; }).catch(function(){});
+  })();
+
+  // Reconstructs this ENTIRE page (a full document, doctype first) so
+  // it can be republished via the "artifact" capability. Everything
+  // but the data comes straight from this already-loaded page (the
+  // font link, the stylesheet, this very script's own source) so the
+  // published copy always matches what's actually running; only the
+  // #decks-data payload changes between saves.
+  function buildFullHtml(){
+    var fontLink = document.getElementById("font-link").outerHTML;
+    var styleTag = document.getElementById("main-style").outerHTML;
+    var scriptSrc = document.getElementById("main-script").textContent;
+    var dataJson = JSON.stringify(DECKS).replace(/<\//g, "<\\/");
+    return "<!doctype html>\n<html lang=\"en\">\n<head>\n" +
+      "<meta charset=\"utf-8\">\n" +
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
+      fontLink + "\n" +
+      "<title>Checkride Flashcards</title>\n" +
+      styleTag + "\n" +
+      "</head>\n<body>\n" +
+      "<div class=\"shell\">\n" +
+      "  <header class=\"masthead\">\n" +
+      "    <h1><span class=\"plane\">&#9992;</span> Checkride Flashcards</h1>\n" +
+      "    <div class=\"head-actions\">\n" +
+      "      <div class=\"stat\" id=\"headerStat\"></div>\n" +
+      "      <button type=\"button\" class=\"ghost manage-link\" id=\"manageBtn\">&#9881; Manage Sections</button>\n" +
+      "    </div>\n" +
+      "  </header>\n" +
+      "  <main id=\"app\"></main>\n" +
+      "</div>\n" +
+      "<script type=\"application/json\" id=\"decks-data\">" + dataJson + "<\/script>\n" +
+      "<script id=\"main-script\">" + scriptSrc + "<\/script>\n" +
+      "</body>\n</html>";
+  }
+
+  // Central save path for every mutation (add/edit/delete/import/reset).
+  // Always mirrors to local storage first so nothing is lost even if a
+  // publish fails or isn't possible; then, when this page can publish
+  // itself, republishes so the change follows the link everywhere.
+  function persist(){
+    saveLocal();
+    rebuildIndex();
+    if (ART){
+      try { sessionStorage.setItem("cf-post-publish-view", state.view === "manage" ? "manage" : "home"); }
+      catch (e){ /* non-fatal */ }
+      saveStatus = { mode: "saving" };
+      render();
+      ART.publish(buildFullHtml()).then(function(){
+        // Success reloads every open view (this one included) to the
+        // new version — nothing else to do here.
+      }).catch(function(err){
+        saveStatus = { mode: "local", code: err && err.code };
+        render();
+      });
+    } else {
+      saveStatus = { mode: "local" };
+      render();
+    }
+  }
+
+  var saveStatus = { mode: "unknown" };
+
+  // ---------------------------------------------------------------
+  // Small helpers
+  // ---------------------------------------------------------------
+  function el(tag, className, text){
+    var e = document.createElement(tag);
+    if (className) e.className = className;
+    if (text !== undefined && text !== null) e.textContent = text;
+    return e;
+  }
+
+  function shuffle(arr){
+    for (var i = arr.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+
+  // Draws indices 0..n-1 in random order, reshuffling once exhausted.
+  function ShuffleBag(n){
+    this.n = n;
+    this.round = 0;
+    this.pos = 0;
+    this.arr = [];
+    this.refill();
+  }
+  ShuffleBag.prototype.refill = function(){
+    var a = [];
+    for (var i = 0; i < this.n; i++) a.push(i);
+    this.arr = shuffle(a);
+    this.pos = 0;
+    this.round += 1;
+  };
+  ShuffleBag.prototype.next = function(){
+    if (this.pos >= this.n) this.refill();
+    return this.arr[this.pos++];
+  };
+
+  // ---------------------------------------------------------------
+  // App state / router
+  // ---------------------------------------------------------------
+  var app = document.getElementById("app");
+  var state = { view: "home" };
+
+  // If a save just republished this page, land back where the user
+  // was (the Manage screen) instead of bouncing them to Home.
+  (function restorePostPublishView(){
+    try {
+      var v = sessionStorage.getItem("cf-post-publish-view");
+      if (v){ sessionStorage.removeItem("cf-post-publish-view"); if (v === "manage") state.view = "manage"; }
+    } catch (e){ /* non-fatal */ }
+  })();
+
+  function go(view, opts){
+    state = Object.assign({ view: view }, opts || {});
+    render();
+  }
+
+  function render(){
+    app.innerHTML = "";
+    if (state.view === "home") renderHome();
+    else if (state.view === "quiz") renderQuiz();
+    else if (state.view === "review") renderReview();
+    else if (state.view === "manage") renderManage();
+    else if (state.view === "sectionForm") renderSectionForm();
+  }
+
+  // ---------------------------------------------------------------
+  // Home
+  // ---------------------------------------------------------------
+  function buildSectionSelect(){
+    var select = el("select");
+    select.setAttribute("aria-label", "Choose a section");
+    var currentDeck = null, group = null;
+    SECTIONS.forEach(function(sec){
+      if (sec.deckName !== currentDeck){
+        currentDeck = sec.deckName;
+        group = document.createElement("optgroup");
+        group.label = currentDeck;
+        select.appendChild(group);
+      }
+      var opt = document.createElement("option");
+      opt.value = sec.idx;
+      opt.textContent = sec.name;
+      group.appendChild(opt);
+    });
+    return select;
+  }
+
+  function renderHome(){
+    var wrap = el("div", "modes");
+
+    // Mode 1 — quiz everything
+    var m1 = el("div", "mode-card");
+    var h1 = el("div", "mode-head");
+    h1.appendChild(el("span", "mode-index", "1"));
+    h1.appendChild(el("h2", null, "Quiz Me On Everything"));
+    m1.appendChild(h1);
+    m1.appendChild(el("p", null, "A random challenge pulled from any checklist, any section — the full " + ALL_ITEMS.length + "-item set."));
+    var row1 = el("div", "mode-row");
+    var start1 = el("button", "primary", "Start Random Quiz");
+    start1.addEventListener("click", function(){ go("quiz", { mode: "all" }); });
+    row1.appendChild(start1);
+    m1.appendChild(row1);
+    wrap.appendChild(m1);
+
+    // Mode 2 — quiz a chosen section, random order
+    var m2 = el("div", "mode-card alt");
+    var h2 = el("div", "mode-head");
+    h2.appendChild(el("span", "mode-index", "2"));
+    h2.appendChild(el("h2", null, "Drill One Section"));
+    m2.appendChild(h2);
+    m2.appendChild(el("p", null, "Pick a section and get quizzed on its items in random order, one card at a time."));
+    var row2 = el("div", "mode-row");
+    var sel2 = buildSectionSelect();
+    var start2 = el("button", "primary", "Start Drill");
+    start2.addEventListener("click", function(){
+      go("quiz", { mode: "section", sectionIdx: Number(sel2.value) });
+    });
+    row2.appendChild(sel2);
+    row2.appendChild(start2);
+    m2.appendChild(row2);
+    wrap.appendChild(m2);
+
+    // Mode 3 — whole-section review card
+    var m3 = el("div", "mode-card");
+    var h3 = el("div", "mode-head");
+    h3.appendChild(el("span", "mode-index", "3"));
+    h3.appendChild(el("h2", null, "Review A Whole Section"));
+    m3.appendChild(h3);
+    m3.appendChild(el("p", null, "One card holds an entire section. Recite every response down the list, then flip to check them all at once."));
+    var row3 = el("div", "mode-row");
+    var sel3 = buildSectionSelect();
+    var start3 = el("button", "primary", "Open Review Card");
+    start3.addEventListener("click", function(){
+      go("review", { sectionIdx: Number(sel3.value) });
+    });
+    row3.appendChild(sel3);
+    row3.appendChild(start3);
+    m3.appendChild(row3);
+    wrap.appendChild(m3);
+
+    app.appendChild(wrap);
+  }
+
+  // ---------------------------------------------------------------
+  // Quiz view (modes 1 & 2 share this)
+  // ---------------------------------------------------------------
+  function renderQuiz(){
+    var items, eyebrowDeck, eyebrowSection, eyebrowTagline;
+    if (state.mode === "all"){
+      items = ALL_ITEMS;
+      eyebrowDeck = "All Checklists";
+    } else {
+      var sec = SECTIONS[state.sectionIdx];
+      items = sec.items.map(function(pair){
+        return { deckName: sec.deckName, sectionName: sec.name, tagline: sec.tagline, front: pair[0], back: pair[1] };
+      });
+      eyebrowDeck = sec.deckName;
+      eyebrowSection = sec.name;
+      eyebrowTagline = sec.tagline;
+    }
+
+    if (!state.session || state.session.total !== items.length || state.session._mode !== state.mode || state.session._sectionIdx !== state.sectionIdx){
+      state.session = {
+        _mode: state.mode,
+        _sectionIdx: state.sectionIdx,
+        bag: new ShuffleBag(items.length),
+        total: items.length,
+        history: [],
+        pointer: -1,
+        flipped: false
+      };
+      drawNext();
+    }
+
+    var bar = el("div", "session-bar");
+    var back = el("button", "ghost", "‹ Back");
+    back.addEventListener("click", function(){ go("home"); });
+    bar.appendChild(back);
+
+    var mid = el("div", "eyebrow-block");
+    var eyebrowLine = eyebrowSection ? (eyebrowDeck + " ") : eyebrowDeck;
+    var eb = el("div", "eyebrow");
+    if (eyebrowSection){
+      eb.appendChild(document.createTextNode(eyebrowDeck));
+      var dot = el("span", "dot", "•");
+      eb.appendChild(dot);
+      eb.appendChild(document.createTextNode(eyebrowSection));
+    } else {
+      eb.textContent = eyebrowDeck;
+    }
+    mid.appendChild(eb);
+    if (eyebrowTagline){
+      mid.appendChild(el("div", "tagline", "“" + eyebrowTagline + "”"));
+    }
+    bar.appendChild(mid);
+
+    var prog = el("div", "progress",
+      "Card " + state.session.bag.pos + " of " + state.session.total +
+      (state.session.bag.round > 1 ? "  ·  round " + state.session.bag.round : ""));
+    bar.appendChild(prog);
+
+    app.appendChild(bar);
+
+    var current = items[state.session.history[state.session.pointer]];
+
+    var scene = el("div", "flip-scene");
+    var card = el("div", "flip-card");
+    card.tabIndex = 0;
+    if (state.session.flipped) card.classList.add("flipped");
+    var inner = el("div", "flip-inner");
+
+    var front = el("div", "face front");
+    front.appendChild(el("div", "face-label", "Challenge"));
+    var frontContent = el("div", "face-content");
+    frontContent.appendChild(el("div", "txt", current.front));
+    front.appendChild(frontContent);
+
+    var backFace = el("div", "face back");
+    backFace.appendChild(el("div", "face-label", "Response"));
+    var backContent = el("div", "face-content");
+    backContent.appendChild(el("div", "txt", current.back));
+    backFace.appendChild(backContent);
+
+    inner.appendChild(front);
+    inner.appendChild(backFace);
+    card.appendChild(inner);
+    scene.appendChild(card);
+    app.appendChild(scene);
+
+    app.appendChild(el("div", "flip-hint", "Click the card, or press Space, to flip it"));
+
+    function toggleFlip(){
+      state.session.flipped = !state.session.flipped;
+      card.classList.toggle("flipped", state.session.flipped);
+    }
+    card.addEventListener("click", toggleFlip);
+    card.addEventListener("keydown", function(e){
+      if (e.key === " " || e.key === "Enter"){ e.preventDefault(); toggleFlip(); }
+      else if (e.key === "ArrowRight"){ e.preventDefault(); goNext(); }
+      else if (e.key === "ArrowLeft"){ e.preventDefault(); goPrev(); }
+    });
+
+    var controls = el("div", "controls");
+    var prevBtn = el("button", null, "‹ Prev");
+    prevBtn.disabled = state.session.pointer <= 0;
+    prevBtn.addEventListener("click", goPrev);
+    var flipBtn = el("button", "primary", "Flip");
+    flipBtn.addEventListener("click", toggleFlip);
+    var nextBtn = el("button", null, "Next ›");
+    nextBtn.addEventListener("click", goNext);
+    controls.appendChild(prevBtn);
+    controls.appendChild(flipBtn);
+    controls.appendChild(nextBtn);
+    app.appendChild(controls);
+
+    function drawNext(){
+      var idx = state.session.bag.next();
+      state.session.history.push(idx);
+      state.session.pointer = state.session.history.length - 1;
+      state.session.flipped = false;
+    }
+    function goNext(){
+      if (state.session.pointer < state.session.history.length - 1){
+        state.session.pointer++;
+      } else {
+        drawNext();
+      }
+      state.session.flipped = false;
+      render();
+    }
+    function goPrev(){
+      if (state.session.pointer > 0){
+        state.session.pointer--;
+        state.session.flipped = false;
+        render();
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // Whole-section review card
+  // ---------------------------------------------------------------
+  function renderReview(){
+    var sec = SECTIONS[state.sectionIdx];
+
+    var bar = el("div", "session-bar");
+    var back = el("button", "ghost", "‹ Back");
+    back.addEventListener("click", function(){ go("home"); });
+    bar.appendChild(back);
+
+    var mid = el("div", "eyebrow-block");
+    var eb = el("div", "eyebrow", sec.deckName);
+    mid.appendChild(eb);
+    if (sec.tagline){
+      mid.appendChild(el("div", "tagline", "“" + sec.tagline + "”"));
+    }
+    bar.appendChild(mid);
+    bar.appendChild(el("div", "progress", sec.items.length + " items"));
+    app.appendChild(bar);
+
+    var revealed = false;
+    var card = el("div", "review-card");
+
+    var head = el("div");
+    head.appendChild(el("h2", null, sec.name));
+    head.setAttribute("style", "margin-bottom:4px;");
+    var h2 = head.querySelector("h2");
+    h2.style.fontFamily = "'Big Shoulders Display', sans-serif";
+    h2.style.textTransform = "uppercase";
+    h2.style.letterSpacing = "0.01em";
+    h2.style.fontSize = "22px";
+    h2.style.margin = "0 0 2px";
+    card.appendChild(head);
+    card.appendChild(el("div", "tagline", "Recite the response for each item, then flip to check the whole section."));
+
+    var list = el("div", "review-list");
+    sec.items.forEach(function(pair, i){
+      var row = el("div", "review-row");
+      row.appendChild(el("div", "row-num", String(i + 1).padStart(2, "0")));
+      row.appendChild(el("div", "row-item", pair[0]));
+      row.appendChild(el("div", "row-leader"));
+      var resp = el("div", "row-resp", "");
+      row.appendChild(resp);
+      list.appendChild(row);
+    });
+    card.appendChild(list);
+
+    var toggleWrap = el("div", "review-toggle");
+    var toggleBtn = el("button", "primary", "Reveal Responses");
+    toggleWrap.appendChild(toggleBtn);
+    card.appendChild(toggleWrap);
+
+    function paint(){
+      var rows = list.querySelectorAll(".row-resp");
+      sec.items.forEach(function(pair, i){
+        rows[i].textContent = revealed ? pair[1] : "";
+      });
+      card.classList.toggle("revealed", revealed);
+      toggleBtn.textContent = revealed ? "Hide Responses" : "Reveal Responses";
+    }
+    toggleBtn.addEventListener("click", function(){
+      revealed = !revealed;
+      paint();
+    });
+    paint();
+
+    app.appendChild(card);
+  }
+
+  // ---------------------------------------------------------------
+  // Data mutation helpers shared by the manage list, the add/edit
+  // form, delete, import and reset.
+  // ---------------------------------------------------------------
+  function findDeckIndex(deckName){
+    for (var i = 0; i < DECKS.length; i++){ if (DECKS[i].deck === deckName) return i; }
+    return -1;
+  }
+  function removeSection(deckIndex, sectionIndex){
+    DECKS[deckIndex].sections.splice(sectionIndex, 1);
+    if (DECKS[deckIndex].sections.length === 0) DECKS.splice(deckIndex, 1);
+  }
+  // oldRef (or null for a brand-new section) is removed first, then the
+  // section is (re)inserted under newDeckName — an existing deck if the
+  // name matches one, otherwise a freshly created deck group. This is
+  // also how editing a section into a different checklist name works:
+  // it just moves.
+  function upsertSection(oldRef, newDeckName, newSection){
+    if (oldRef) removeSection(oldRef.deckIndex, oldRef.sectionIndex);
+    var di = findDeckIndex(newDeckName);
+    if (di === -1){ DECKS.push({ deck: newDeckName, sections: [] }); di = DECKS.length - 1; }
+    DECKS[di].sections.push(newSection);
+  }
+
+  // ---------------------------------------------------------------
+  // Manage view: list every section with Edit/Delete, plus Add,
+  // Export, Import and Reset.
+  // ---------------------------------------------------------------
+  function saveStatusLabel(){
+    if (saveStatus.mode === "saving") return { text: "Saving…", on: false };
+    if (ART && saveStatus.mode !== "local") return { text: "Synced to this link", on: true };
+    return { text: "Saved on this device only", on: false };
+  }
+
+  function renderManage(){
+    var bar = el("div", "session-bar");
+    var back = el("button", "ghost", "‹ Back");
+    back.addEventListener("click", function(){ go("home"); });
+    bar.appendChild(back);
+    var mid = el("div", "eyebrow-block");
+    mid.appendChild(el("div", "eyebrow", "Manage Sections"));
+    bar.appendChild(mid);
+    var label = saveStatusLabel();
+    var pill = el("div", "status-pill" + (label.on ? " on" : ""), label.text);
+    bar.appendChild(pill);
+    app.appendChild(bar);
+
+    var util = el("div", "utility-row");
+    var addBtn = el("button", "primary", "+ Add Section");
+    addBtn.addEventListener("click", function(){ go("sectionForm", { formRef: null }); });
+    var exportBtn = el("button", null, "Export Config");
+    exportBtn.addEventListener("click", function(){ exportConfig(); });
+    var importBtn = el("button", null, "Import Config");
+    var importInput = document.createElement("input");
+    importInput.type = "file";
+    importInput.accept = "application/json,.json";
+    importInput.hidden = true;
+    importBtn.addEventListener("click", function(){ importInput.click(); });
+    var resetBtn = el("button", "ghost danger-text", "Reset to Original Checklists");
+    var resetConfirming = false;
+    resetBtn.addEventListener("click", function(){
+      if (!resetConfirming){
+        resetConfirming = true;
+        resetBtn.textContent = "Click again to confirm reset";
+        setTimeout(function(){ resetConfirming = false; resetBtn.textContent = "Reset to Original Checklists"; }, 4000);
+        return;
+      }
+      DECKS = deepClone(FACTORY_DECKS);
+      persist();
+    });
+    util.appendChild(addBtn);
+    util.appendChild(exportBtn);
+    util.appendChild(importBtn);
+    util.appendChild(importInput);
+    util.appendChild(resetBtn);
+    app.appendChild(util);
+
+    var importPreview = el("div", "import-preview");
+    importPreview.hidden = true;
+    app.appendChild(importPreview);
+
+    importInput.addEventListener("change", function(){
+      var file = importInput.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(){
+        importPreview.innerHTML = "";
+        importPreview.hidden = false;
+        var parsed;
+        try { parsed = JSON.parse(String(reader.result)); }
+        catch (e){ importPreview.appendChild(el("div", null, "That file is not valid JSON.")); return; }
+        if (!validateDecks(parsed)){
+          importPreview.appendChild(el("div", null, "That file doesn't match the flashcard config format."));
+          return;
+        }
+        var counts = countDecks(parsed);
+        importPreview.appendChild(el("div", null,
+          "Ready to import " + counts.decks + " checklist(s), " + counts.sections + " section(s), " +
+          counts.items + " item(s) from “" + file.name + "”."));
+        var confirmRow = el("div", "form-actions");
+        var yes = el("button", "primary", "Replace My Sections");
+        yes.addEventListener("click", function(){ DECKS = parsed; persist(); });
+        var no = el("button", null, "Cancel");
+        no.addEventListener("click", function(){ importPreview.hidden = true; importInput.value = ""; });
+        confirmRow.appendChild(yes);
+        confirmRow.appendChild(no);
+        importPreview.appendChild(confirmRow);
+      };
+      reader.readAsText(file);
+    });
+
+    if (DECKS.length === 0){
+      app.appendChild(el("div", "empty-note", "No sections left. Add one, or reset to the original checklists."));
+      return;
+    }
+
+    var canDelete = SECTIONS.length > 1;
+    DECKS.forEach(function(deck, di){
+      var group = el("div", "deck-group");
+      group.appendChild(el("div", "deck-group-title", deck.deck));
+      deck.sections.forEach(function(sec, si){
+        var row = el("div", "section-row");
+        var info = el("div", "info");
+        info.appendChild(el("div", "name", sec.name + (sec.tagline ? " — “" + sec.tagline + "”" : "")));
+        info.appendChild(el("div", "meta", sec.items.length + (sec.items.length === 1 ? " item" : " items")));
+        row.appendChild(info);
+        var actions = el("div", "row-actions");
+        var editBtn = el("button", null, "Edit");
+        editBtn.addEventListener("click", function(){ go("sectionForm", { formRef: { deckIndex: di, sectionIndex: si } }); });
+        actions.appendChild(editBtn);
+        if (canDelete){
+          var delBtn = el("button", "danger", "Delete");
+          var confirming = false;
+          delBtn.addEventListener("click", function(){
+            if (!confirming){
+              confirming = true;
+              delBtn.textContent = "Confirm?";
+              setTimeout(function(){ confirming = false; delBtn.textContent = "Delete"; }, 4000);
+              return;
+            }
+            removeSection(di, si);
+            persist();
+          });
+          actions.appendChild(delBtn);
+        }
+        row.appendChild(actions);
+        group.appendChild(row);
+      });
+      app.appendChild(group);
+    });
+  }
+
+  async function exportConfig(){
+    var json = JSON.stringify(DECKS, null, 2);
+    if (DL){
+      try { await DL.save({ filename: "checkride-flashcards-config.json", data: json }); return; }
+      catch (e){ /* fall through to the plain-browser download below */ }
+    }
+    try {
+      var blob = new Blob([json], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "checkride-flashcards-config.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+    } catch (e){
+      var box = el("div", "import-preview");
+      box.appendChild(el("div", null, "Couldn't start a download here — copy the text below instead."));
+      var ta = document.createElement("textarea");
+      ta.readOnly = true;
+      ta.value = json;
+      ta.style.width = "100%";
+      ta.style.height = "160px";
+      ta.style.marginTop = "8px";
+      box.appendChild(ta);
+      app.appendChild(box);
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // Add / edit a single section. Inputs are uncontrolled (read at
+  // Save time) so typing never triggers a re-render and never loses
+  // focus or cursor position; only structural changes (add/remove an
+  // item row) touch the DOM directly.
+  // ---------------------------------------------------------------
+  function renderSectionForm(){
+    var editRef = state.formRef || null;
+    var deck = editRef ? DECKS[editRef.deckIndex] : null;
+    var sec = editRef ? deck.sections[editRef.sectionIndex] : null;
+
+    var bar = el("div", "session-bar");
+    var back = el("button", "ghost", "‹ Back");
+    back.addEventListener("click", function(){ go("manage"); });
+    bar.appendChild(back);
+    var mid = el("div", "eyebrow-block");
+    mid.appendChild(el("div", "eyebrow", editRef ? "Edit Section" : "Add Section"));
+    bar.appendChild(mid);
+    app.appendChild(bar);
+
+    var form = el("div", "section-form");
+
+    var deckField = el("div", "field");
+    deckField.appendChild(el("label", "field-label", "Checklist / Deck"));
+    var deckInput = document.createElement("input");
+    deckInput.type = "text";
+    deckInput.value = deck ? deck.deck : "";
+    deckInput.placeholder = "e.g. Deck 22 — Icing Procedures";
+    deckInput.setAttribute("list", "deckNameOptions");
+    deckField.appendChild(deckInput);
+    var deckList = document.createElement("datalist");
+    deckList.id = "deckNameOptions";
+    DECKS.forEach(function(d){
+      var opt = document.createElement("option");
+      opt.value = d.deck;
+      deckList.appendChild(opt);
+    });
+    deckField.appendChild(deckList);
+    form.appendChild(deckField);
+
+    var nameField = el("div", "field");
+    nameField.appendChild(el("label", "field-label", "Section Name"));
+    var nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.value = sec ? sec.name : "";
+    nameInput.placeholder = "e.g. Icing Encounter";
+    nameField.appendChild(nameInput);
+    form.appendChild(nameField);
+
+    var tagField = el("div", "field");
+    tagField.appendChild(el("label", "field-label", "Mnemonic / Tagline (optional)"));
+    var tagInput = document.createElement("input");
+    tagInput.type = "text";
+    tagInput.value = sec && sec.tagline ? sec.tagline : "";
+    tagInput.placeholder = "e.g. Pitch, Power, Trim";
+    tagField.appendChild(tagInput);
+    form.appendChild(tagField);
+
+    form.appendChild(el("label", "field-label", "Items — Challenge / Response"));
+    var itemsWrap = el("div", "item-rows");
+    function addRow(front, back){
+      var row = el("div", "item-row");
+      var f = document.createElement("input");
+      f.type = "text"; f.placeholder = "Challenge (e.g. Mixture)"; f.value = front || "";
+      var b = document.createElement("input");
+      b.type = "text"; b.placeholder = "Response (e.g. RICH)"; b.value = back || "";
+      var rm = el("button", "ghost row-remove", "×");
+      rm.type = "button";
+      rm.setAttribute("aria-label", "Remove this item");
+      rm.addEventListener("click", function(){ row.remove(); });
+      row.appendChild(f);
+      row.appendChild(b);
+      row.appendChild(rm);
+      itemsWrap.appendChild(row);
+      return row;
+    }
+    if (sec && sec.items.length){
+      sec.items.forEach(function(pair){ addRow(pair[0], pair[1]); });
+    } else {
+      addRow("", "");
+      addRow("", "");
+    }
+    form.appendChild(itemsWrap);
+
+    var addItemBtn = el("button", null, "+ Add Item");
+    addItemBtn.type = "button";
+    addItemBtn.addEventListener("click", function(){
+      var row = addRow("", "");
+      row.querySelector("input").focus();
+    });
+    form.appendChild(addItemBtn);
+
+    var errorBox = el("div", "form-error");
+    errorBox.hidden = true;
+    form.appendChild(errorBox);
+
+    var actions = el("div", "form-actions");
+    var saveBtn = el("button", "primary", "Save Section");
+    saveBtn.type = "button";
+    actions.appendChild(saveBtn);
+    var cancelBtn = el("button", null, "Cancel");
+    cancelBtn.type = "button";
+    cancelBtn.addEventListener("click", function(){ go("manage"); });
+    actions.appendChild(cancelBtn);
+    if (editRef && SECTIONS.length > 1){
+      var delBtn = el("button", "danger", "Delete Section");
+      delBtn.type = "button";
+      var confirmingDelete = false;
+      delBtn.addEventListener("click", function(){
+        if (!confirmingDelete){
+          confirmingDelete = true;
+          delBtn.textContent = "Click again to confirm delete";
+          setTimeout(function(){ confirmingDelete = false; delBtn.textContent = "Delete Section"; }, 4000);
+          return;
+        }
+        removeSection(editRef.deckIndex, editRef.sectionIndex);
+        state.view = "manage";
+        persist();
+      });
+      actions.appendChild(delBtn);
+    }
+    form.appendChild(actions);
+
+    saveBtn.addEventListener("click", function(){
+      var dn = deckInput.value.trim();
+      var sn = nameInput.value.trim();
+      var tg = tagInput.value.trim();
+      var rows = Array.prototype.slice.call(itemsWrap.querySelectorAll(".item-row"));
+      var items = rows.map(function(r){
+        var inputs = r.querySelectorAll("input");
+        return [inputs[0].value.trim(), inputs[1].value.trim()];
+      }).filter(function(pair){ return pair[0] && pair[1]; });
+
+      if (!dn || !sn || items.length === 0){
+        errorBox.textContent = "Enter a checklist name, a section name, and at least one item with both a challenge and a response.";
+        errorBox.hidden = false;
+        return;
+      }
+      var newSection = { name: sn, items: items };
+      if (tg) newSection.tagline = tg;
+      upsertSection(editRef, dn, newSection);
+      state.view = "manage";
+      persist();
+    });
+
+    app.appendChild(form);
+  }
+
+  document.getElementById("manageBtn").addEventListener("click", function(){ go("manage"); });
+
+  render();
+})();
+</script>
