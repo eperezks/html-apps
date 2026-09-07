@@ -1138,7 +1138,16 @@
     DECKS[deckIndex].sections.splice(sectionIndex, 1);
     if (DECKS[deckIndex].sections.length === 0) DECKS.splice(deckIndex, 1);
   }
+  // Editing a section without renaming its checklist replaces it in place,
+  // at its existing index, so it keeps its position among its siblings
+  // (and its deck keeps its position among decks). Moving a section to a
+  // different/new checklist name has no "existing position" to preserve,
+  // so it's appended to that checklist as before.
   function upsertSection(oldRef, newDeckName, newSection){
+    if (oldRef && DECKS[oldRef.deckIndex].deck === newDeckName){
+      DECKS[oldRef.deckIndex].sections[oldRef.sectionIndex] = newSection;
+      return;
+    }
     if (oldRef) removeSection(oldRef.deckIndex, oldRef.sectionIndex);
     var di = findDeckIndex(newDeckName);
     if (di === -1){ DECKS.push({ deck: newDeckName, sections: [] }); di = DECKS.length - 1; }

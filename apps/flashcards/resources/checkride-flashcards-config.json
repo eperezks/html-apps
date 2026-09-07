@@ -355,38 +355,7 @@
           [
             "Mixture",
             "Idle Cut Off"
-          ]
-        ]
-      },
-      {
-        "name": "Prime The Engine",
-        "tagline": "As Required",
-        "items": [
-          [
-            "Throttle",
-            "Open 1 inch"
           ],
-          [
-            "Auxiliary Fuel Pump",
-            "ON"
-          ],
-          [
-            "Mixture",
-            "RICH until positive fuel flow in warm temps / longer for cold temps"
-          ],
-          [
-            "Mixture",
-            "IDLE CUT OFF"
-          ],
-          [
-            "Auxiliary Fuel Pump",
-            "OFF"
-          ]
-        ]
-      },
-      {
-        "name": "Starting",
-        "items": [
           [
             "Throttle",
             "Set no more than 1/8 inch"
@@ -436,6 +405,32 @@
             "ALT"
           ]
         ]
+      },
+      {
+        "name": "Prime The Engine",
+        "tagline": "As Required",
+        "items": [
+          [
+            "Throttle",
+            "Open 1 inch"
+          ],
+          [
+            "Auxiliary Fuel Pump",
+            "ON"
+          ],
+          [
+            "Mixture",
+            "RICH until positive fuel flow in warm temps / longer for cold temps"
+          ],
+          [
+            "Mixture",
+            "IDLE CUT OFF"
+          ],
+          [
+            "Auxiliary Fuel Pump",
+            "OFF"
+          ]
+        ]
       }
     ]
   },
@@ -443,7 +438,7 @@
     "deck": "Deck 3 — Before Taxi",
     "sections": [
       {
-        "name": "Before Taxi",
+        "name": "Before Taxi (Done)",
         "items": [
           [
             "Clocks",
@@ -586,7 +581,7 @@
     "deck": "Deck 6 — Engine Runup",
     "sections": [
       {
-        "name": "Engine Runup",
+        "name": "Engine Runup (Done)",
         "items": [
           [
             "Nose Wheel",
@@ -601,7 +596,7 @@
             "Free of Debris"
           ],
           [
-            "Field Conditions",
+            "Flight Controls",
             "Free & Correct"
           ],
           [
@@ -637,12 +632,12 @@
             "Check"
           ],
           [
-            "Ammeter",
+            "Vacuum",
             "Check (if installed)"
           ],
           [
-            "Magnetos",
-            "Check"
+            "Ammeter",
+            "1/2 Needle Charging"
           ],
           [
             "Magneto check limits",
@@ -654,7 +649,7 @@
           ],
           [
             "Mixture",
-            "Lean"
+            "Taxi Lean"
           ],
           [
             "Throttle Friction",
@@ -676,7 +671,7 @@
     "deck": "Deck 7 — IFR Checks",
     "sections": [
       {
-        "name": "IFR Checks",
+        "name": "IFR Checks - VFR Take Off Briefs (Done)",
         "items": [
           [
             "Departure Procedure",
@@ -698,8 +693,7 @@
     "deck": "Deck 8 — Takeoff",
     "sections": [
       {
-        "name": "Take Off",
-        "tagline": "Lights, Camera, Action",
+        "name": "Take Off (Done)",
         "items": [
           [
             "Strobes & Landing Light",
@@ -729,7 +723,8 @@
             "Elevator Control",
             "Lift Nose Wheel"
           ]
-        ]
+        ],
+        "tagline": "Lights, Camera, Action"
       }
     ]
   },
@@ -737,7 +732,7 @@
     "deck": "Deck 9 — Climb",
     "sections": [
       {
-        "name": "Climb",
+        "name": "Climb (Done)",
         "items": [
           [
             "Airspeed",
@@ -755,8 +750,7 @@
     "deck": "Deck 10 — Cruise (Top of Climb)",
     "sections": [
       {
-        "name": "Cruise (Top of Climb)",
-        "tagline": "Pitch, Power, Trim",
+        "name": "Cruise (Top of Climb) (Done)",
         "items": [
           [
             "Landing Light",
@@ -778,7 +772,8 @@
             "System Gauges",
             "MONITOR during cruise"
           ]
-        ]
+        ],
+        "tagline": "Pitch, Power, Trim"
       }
     ]
   },
@@ -786,8 +781,7 @@
     "deck": "Deck 11 — Approach (IFR)",
     "sections": [
       {
-        "name": "Approach (IFR)",
-        "tagline": "WIRE",
+        "name": "Approach (IFR) (Done)",
         "items": [
           [
             "Weather",
@@ -805,7 +799,8 @@
             "Environment",
             "Approach Plate — systematically verify and brief"
           ]
-        ]
+        ],
+        "tagline": "WIRE"
       }
     ]
   },
@@ -813,7 +808,7 @@
     "deck": "Deck 12 — Descent (Top of Descent)",
     "sections": [
       {
-        "name": "Descent (Top of Descent)",
+        "name": "Descent (Top of Descent) (Done)",
         "items": [
           [
             "Power",
@@ -851,7 +846,7 @@
     "deck": "Deck 13 — Before Landing",
     "sections": [
       {
-        "name": "Before Landing",
+        "name": "Before Landing (Done)",
         "items": [
           [
             "Mixture",
@@ -873,7 +868,7 @@
     "deck": "Deck 14 — Landing",
     "sections": [
       {
-        "name": "Landing",
+        "name": "Landing (Done)",
         "items": [
           [
             "Wing Flaps",
@@ -907,7 +902,7 @@
     "deck": "Deck 15 — Go-Around",
     "sections": [
       {
-        "name": "Go-Around",
+        "name": "Go-Around (Done)",
         "items": [
           [
             "Throttle",
@@ -929,7 +924,7 @@
     "deck": "Deck 16 — After Landing",
     "sections": [
       {
-        "name": "After Landing — Clear of Runway and Stopped",
+        "name": "After Landing — Clear of Runway and Stopped (Done)",
         "items": [
           [
             "Flaps",
@@ -950,6 +945,10 @@
           [
             "Pitot Heat",
             "OFF"
+          ],
+          [
+            "GET TAXI CLEARANCE!!",
+            "True"
           ]
         ]
       }
@@ -959,7 +958,7 @@
     "deck": "Deck 17 — Parking",
     "sections": [
       {
-        "name": "Parking",
+        "name": "Parking (Done)",
         "items": [
           [
             "All Lights (except beacon)",

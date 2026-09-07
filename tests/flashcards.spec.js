@@ -1,7 +1,21 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const APP_URL = '/apps/flashcards/index.html';
+const CONFIG_ROUTE = '**/apps/flashcards/resources/checkride-flashcards-config.json';
+
+// A small, fixed 3-section deck used by the ordering tests below so they
+// don't depend on (or get broken by) edits made to the real resources file.
+const ORDERED_DECK = [
+  { deck: 'Deck A', sections: [
+    { name: 'Alpha', items: [['a-front', 'a-back']] },
+    { name: 'Bravo', items: [['b-front', 'b-back']] },
+    { name: 'Charlie', items: [['c-front', 'c-back']] }
+  ] }
+];
 
 test.describe('Checkride Flashcards app', () => {
   test('loads directly and shows the three study modes', async ({ page }) => {
@@ -122,6 +136,78 @@ test.describe('Checkride Flashcards app', () => {
 
     await expect(page.locator('.section-row').first()).toBeVisible();
     expect(fetchCount).toBe(1);
+  });
+
+  test('editing a section keeps its position in the list', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
+    });
+    await page.goto(APP_URL);
+    await page.getByRole('button', { name: /Manage Sections/ }).click();
+
+    await expect(page.locator('.section-row .name')).toHaveText(['Alpha', 'Bravo', 'Charlie']);
+
+    // Edit the middle section (Bravo) and change its content.
+    await page.locator('.section-row', { hasText: 'Bravo' }).getByRole('button', { name: 'Edit' }).click();
+    const taglineInput = page.locator('.field', { hasText: 'Mnemonic' }).locator('input');
+    await taglineInput.fill('Edited Tagline');
+    await page.getByRole('button', { name: 'Save Section' }).click();
+
+    // Still Alpha, Bravo, Charlie in that order — Bravo didn't move to the end.
+    await expect(page.locator('.section-row .name')).toHaveText([
+      'Alpha',
+      'Bravo — “Edited Tagline”',
+      'Charlie',
+    ]);
+  });
+
+  test('Export Config downloads the sections in their current order', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
+    });
+    await page.goto(APP_URL);
+    await page.getByRole('button', { name: /Manage Sections/ }).click();
+
+    const [download] = await Promise.all([
+      page.waitForEvent('download'),
+      page.getByRole('button', { name: 'Export Config' }).click(),
+    ]);
+    const filePath = await download.path();
+    const exported = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+
+    expect(exported.map((d) => d.deck)).toEqual(['Deck A']);
+    expect(exported[0].sections.map((s) => s.name)).toEqual(['Alpha', 'Bravo', 'Charlie']);
+  });
+
+  test('Import Config replaces sections and preserves the imported order exactly', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
+    });
+    await page.goto(APP_URL);
+    await page.getByRole('button', { name: /Manage Sections/ }).click();
+    await expect(page.locator('.section-row .name')).toHaveText(['Alpha', 'Bravo', 'Charlie']);
+
+    // Import a file with a deliberately different order and an extra deck.
+    const customOrder = [
+      { deck: 'Deck Z', sections: [
+        { name: 'Zulu', items: [['z-front', 'z-back']] }
+      ] },
+      { deck: 'Deck A', sections: [
+        { name: 'Charlie', items: [['c-front', 'c-back']] },
+        { name: 'Alpha', items: [['a-front', 'a-back']] },
+        { name: 'Bravo', items: [['b-front', 'b-back']] }
+      ] }
+    ];
+    const tmpFile = path.join(os.tmpdir(), `checkride-import-${Date.now()}.json`);
+    fs.writeFileSync(tmpFile, JSON.stringify(customOrder));
+
+    await page.locator('input[type="file"]').setInputFiles(tmpFile);
+    await page.getByRole('button', { name: 'Replace My Sections' }).click();
+
+    await expect(page.locator('.deck-group-title')).toHaveText(['Deck Z', 'Deck A']);
+    await expect(page.locator('.section-row .name')).toHaveText(['Zulu', 'Charlie', 'Alpha', 'Bravo']);
+
+    fs.unlinkSync(tmpFile);
   });
 
   test('Manage Sections view lists sections with edit/delete controls', async ({ page }) => {
