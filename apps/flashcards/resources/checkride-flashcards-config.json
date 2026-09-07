@@ -1204,5 +1204,186 @@
         ]
       }
     ]
+  },
+  {
+    "deck": "Deck 22 — Memory Aids & Acronyms",
+    "sections": [
+      {
+        "name": "ARROW",
+        "tagline": "Required Aircraft Documents",
+        "items": [
+          [
+            "A",
+            "Airworthiness Certificate"
+          ],
+          [
+            "R",
+            "Registration Certificate"
+          ],
+          [
+            "R",
+            "Radio Station License (required for flights outside the U.S.)"
+          ],
+          [
+            "O",
+            "Operating Limitations (POH/AFM, placards, markings)"
+          ],
+          [
+            "W",
+            "Weight and Balance data (with equipment list)"
+          ]
+        ]
+      },
+      {
+        "name": "AVIATES",
+        "tagline": "Recurring Inspections & Checks",
+        "items": [
+          [
+            "A",
+            "Annual Inspection — Required every 12 calendar months for all aircraft"
+          ],
+          [
+            "V",
+            "VOR Check — Required every 30 days for IFR flight using VOR navigation"
+          ],
+          [
+            "I",
+            "100-Hour Inspection — Required if used for hire or flight instruction"
+          ],
+          [
+            "A",
+            "Airworthiness Directives (ADs) — Mandatory FAA safety corrections, complied with as required"
+          ],
+          [
+            "T",
+            "Transponder — Tested and inspected every 24 calendar months"
+          ],
+          [
+            "E",
+            "ELT — Inspected every 12 months, or at 50% battery use/expiration"
+          ],
+          [
+            "S",
+            "Static System / Altimeter — Checked every 24 calendar months for IFR flight"
+          ]
+        ]
+      },
+      {
+        "name": "I'M SAFE",
+        "tagline": "Personal Fitness for Flight",
+        "items": [
+          [
+            "I",
+            "Illness — Any symptoms that could impair flying?"
+          ],
+          [
+            "M",
+            "Medication — Taking any drugs, prescription or OTC?"
+          ],
+          [
+            "S",
+            "Stress — Under psychological or emotional pressure?"
+          ],
+          [
+            "A",
+            "Alcohol — Within 8 hours (bottle to throttle), or still impaired?"
+          ],
+          [
+            "F",
+            "Fatigue — Tired or poorly rested?"
+          ],
+          [
+            "E",
+            "Eating/Emotion — Adequately nourished, and emotionally fit to fly?"
+          ]
+        ]
+      },
+      {
+        "name": "PAVE",
+        "tagline": "Risk Management Checklist",
+        "items": [
+          [
+            "P",
+            "Pilot — Is the pilot fit to fly? (I'M SAFE)"
+          ],
+          [
+            "A",
+            "Aircraft — Is the aircraft airworthy and equipped for the flight?"
+          ],
+          [
+            "V",
+            "enVironment — Weather, terrain, airport, day/night conditions"
+          ],
+          [
+            "E",
+            "External Pressures — Get-there-itis, schedules, passengers"
+          ]
+        ]
+      },
+      {
+        "name": "GUMPS",
+        "tagline": "Pre-Landing Check (Retractable Gear)",
+        "items": [
+          [
+            "G",
+            "Gas — Fuel selector on proper/fullest tank, quantity checked"
+          ],
+          [
+            "U",
+            "Undercarriage — Landing gear down and locked"
+          ],
+          [
+            "M",
+            "Mixture — Set for landing"
+          ],
+          [
+            "P",
+            "Propeller — Set for go-around (full forward/high RPM)"
+          ],
+          [
+            "S",
+            "Seatbelts/Switches — Secure; landing light and switches set"
+          ]
+        ]
+      },
+      {
+        "name": "GRABCARD",
+        "tagline": "IFR Equipment Requirements",
+        "items": [
+          [
+            "G",
+            "Generator or Alternator — Sufficient capacity for all installed electrical equipment"
+          ],
+          [
+            "R",
+            "Radios — Two-way communication and navigation equipment for the route flown"
+          ],
+          [
+            "A",
+            "Altimeter — Sensitive altimeter adjustable for barometric pressure"
+          ],
+          [
+            "B",
+            "Ball — Slip-skid inclinometer indicator"
+          ],
+          [
+            "C",
+            "Clock — Hours, minutes, seconds with sweep-second pointer or digital display, installed"
+          ],
+          [
+            "A",
+            "Attitude Indicator — Gyroscopic pitch and bank indicator"
+          ],
+          [
+            "R",
+            "Rate of Turn Indicator — Turn coordinator or turn and slip indicator"
+          ],
+          [
+            "D",
+            "Directional Gyro — Heading indicator"
+          ]
+        ]
+      }
+    ]
   }
 ]

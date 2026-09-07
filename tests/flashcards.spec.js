@@ -74,7 +74,7 @@ test.describe('Checkride Flashcards app', () => {
     await page.unroute('**/apps/flashcards/resources/checkride-flashcards-config.json');
     await page.getByRole('button', { name: 'Retry' }).click();
     await expect(page.locator('.mode-card')).toHaveCount(3);
-    await expect(page.locator('#headerStat')).toHaveText(/21 checklists/);
+    await expect(page.locator('#headerStat')).toHaveText(/22 checklists/);
   });
 
   test('Quiz Me On Everything starts a flippable quiz session', async ({ page }) => {
