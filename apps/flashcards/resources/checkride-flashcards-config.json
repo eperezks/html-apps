@@ -3,7 +3,7 @@
     "deck": "Deck 1 — Pre-Flight Inspection",
     "sections": [
       {
-        "name": "Cabin",
+        "name": "Cabin (Done)",
         "items": [
           [
             "Inspection Status",
@@ -50,12 +50,16 @@
             "Check"
           ],
           [
-            "Panel and Glare Shields",
+            "Panel and Glare Shield Lights",
             "OFF (counterclockwise)"
           ],
           [
             "Circuit Breakers",
             "IN"
+          ],
+          [
+            "AVIONICS Master",
+            "OFF"
           ],
           [
             "ALL Electrical Switches (except BCN)",
@@ -66,7 +70,7 @@
             "OFF"
           ],
           [
-            "MASTER Switch",
+            "MASTER Switch + G5 Primary",
             "ON"
           ],
           [
@@ -86,7 +90,7 @@
             "Test lights working"
           ],
           [
-            "AVIONICS Master",
+            "AVIONICS Master  + G5 Secondary",
             "ON"
           ],
           [
@@ -112,7 +116,7 @@
         ]
       },
       {
-        "name": "Exterior — Aft Fuselage & Empennage",
+        "name": "Exterior — Aft Fuselage & Empennage (Done)",
         "items": [
           [
             "Baggage Door",
@@ -181,10 +185,10 @@
         ]
       },
       {
-        "name": "Right Wing",
+        "name": "Right Wing (Done)",
         "items": [
           [
-            "Wing Flaps",
+            "Wing Fuel Sumps",
             "Strain (5 sumps)"
           ],
           [
@@ -192,15 +196,15 @@
             "Secure"
           ],
           [
-            "Wing Tip & Leading Edge",
+            "Aileron",
             "Secure & Free"
           ],
           [
-            "Tie-down Rope",
+            "Wing Tip & Leading Edge",
             "Check"
           ],
           [
-            "Main Landing Gear Tire & Brake",
+            "Tie-down Rope",
             "Remove"
           ],
           [
@@ -218,7 +222,7 @@
         ]
       },
       {
-        "name": "Engine & Nose",
+        "name": "Engine & Nose (Done)",
         "items": [
           [
             "Fuselage Fuel Sump",
@@ -257,13 +261,13 @@
             "Condition & Security"
           ],
           [
-            "Static Port",
+            "Static Port (Visual Check Only)",
             "Unobstructed"
           ]
         ]
       },
       {
-        "name": "Left Wing",
+        "name": "Left Wing (Done)",
         "items": [
           [
             "Pitot Tube",
@@ -274,7 +278,7 @@
             "Remove"
           ],
           [
-            "Fuel Tank Vent",
+            "Fuel Tank Vent (Visual Check)",
             "Unobstructed"
           ],
           [
@@ -316,6 +320,31 @@
   {
     "deck": "Deck 2 — Engine Start",
     "sections": [
+      {
+        "name": "Before Start (Done)",
+        "items": [
+          [
+            "Preflight Inspection",
+            "Complete"
+          ],
+          [
+            "Passenger Briefing",
+            "Complete"
+          ],
+          [
+            "Seats & Belts",
+            "Upright & Secure"
+          ],
+          [
+            "Beacon",
+            "ON"
+          ],
+          [
+            "Brakes",
+            "Test & Hold"
+          ]
+        ]
+      },
       {
         "name": "Prime The Engine (Done)",
         "items": [
@@ -404,31 +433,6 @@
           [
             "Transponder",
             "ALT"
-          ]
-        ]
-      },
-      {
-        "name": "Before Start (Done)",
-        "items": [
-          [
-            "Preflight Inspection",
-            "Complete"
-          ],
-          [
-            "Passenger Briefing",
-            "Complete"
-          ],
-          [
-            "Seats & Belts",
-            "Upright & Secure"
-          ],
-          [
-            "Beacon",
-            "ON"
-          ],
-          [
-            "Brakes",
-            "Test & Hold"
           ]
         ]
       }

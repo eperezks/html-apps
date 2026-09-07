@@ -17,6 +17,17 @@ const ORDERED_DECK = [
   ] }
 ];
 
+const TWO_DECKS = [
+  { deck: 'Deck One', sections: [{ name: 'S1', items: [['f1', 'b1']] }] },
+  { deck: 'Deck Two', sections: [{ name: 'S2', items: [['f2', 'b2']] }] }
+];
+
+const ITEM_ORDER_DECK = [
+  { deck: 'Deck Items', sections: [
+    { name: 'Multi', items: [['front-1', 'back-1'], ['front-2', 'back-2'], ['front-3', 'back-3']] }
+  ] }
+];
+
 test.describe('Checkride Flashcards app', () => {
   test('loads directly and shows the three study modes', async ({ page }) => {
     await page.goto(APP_URL);
@@ -161,10 +172,119 @@ test.describe('Checkride Flashcards app', () => {
     ]);
   });
 
-  test('Export Config downloads the sections in their current order', async ({ page }) => {
+  test('dragging a section handle reorders sections within the same checklist', async ({ page }) => {
     await page.route(CONFIG_ROUTE, (route) => {
       route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
     });
+    await page.goto(APP_URL);
+    await page.getByRole('button', { name: /Manage Sections/ }).click();
+    await expect(page.locator('.section-row .name')).toHaveText(['Alpha', 'Bravo', 'Charlie']);
+
+    // Drag Charlie's handle onto Alpha's row to move it to the front.
+    const charlieHandle = page.locator('.section-row', { hasText: 'Charlie' }).locator('.drag-handle');
+    const alphaRow = page.locator('.section-row', { hasText: 'Alpha' });
+    await charlieHandle.dragTo(alphaRow);
+
+    await expect(page.locator('.section-row .name')).toHaveText(['Charlie', 'Alpha', 'Bravo']);
+  });
+
+  test('dragging a checklist handle reorders checklists', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(TWO_DECKS) });
+    });
+    await page.goto(APP_URL);
+    await page.getByRole('button', { name: /Manage Sections/ }).click();
+    await expect(page.locator('.deck-group-title')).toContainText(['Deck One', 'Deck Two']);
+
+    const deckTwoHandle = page.locator('.deck-group', { hasText: 'Deck Two' }).locator('.deck-group-title .drag-handle');
+    const deckOneGroup = page.locator('.deck-group', { hasText: 'Deck One' });
+    await deckTwoHandle.dragTo(deckOneGroup);
+
+    await expect(page.locator('.deck-group-title')).toContainText(['Deck Two', 'Deck One']);
+  });
+
+  test('dragging an item handle reorders items within the section form', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ITEM_ORDER_DECK) });
+    });
+    await page.goto(APP_URL);
+    await page.getByRole('button', { name: /Manage Sections/ }).click();
+    await page.locator('.section-row', { hasText: 'Multi' }).getByRole('button', { name: 'Edit' }).click();
+
+    const rows = page.locator('.item-row');
+    await expect(rows).toHaveCount(3);
+    await expect(rows.nth(0).locator('input').first()).toHaveValue('front-1');
+
+    // Drag the 3rd row's handle to just above the 1st row, moving it to the front.
+    await rows.nth(2).locator('.drag-handle').dragTo(rows.nth(0), { targetPosition: { x: 10, y: 2 } });
+
+    await expect(rows.nth(0).locator('input').first()).toHaveValue('front-3');
+    await expect(rows.nth(1).locator('input').first()).toHaveValue('front-1');
+    await expect(rows.nth(2).locator('input').first()).toHaveValue('front-2');
+
+    // Saving persists the new DOM order.
+    await page.getByRole('button', { name: 'Save Section' }).click();
+    await page.locator('.section-row', { hasText: 'Multi' }).getByRole('button', { name: 'Edit' }).click();
+    await expect(page.locator('.item-row').nth(0).locator('input').first()).toHaveValue('front-3');
+  });
+
+  test('Export Config prompts for a save location via the File System Access API when available', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
+    });
+    // Stub the native picker — a real one can't be driven in automation —
+    // so we can assert the app actually calls it and writes to the handle
+    // it gets back, without a real OS dialog ever appearing.
+    await page.addInitScript(() => {
+      window.__savePicker = { calls: [], written: null };
+      window.showSaveFilePicker = async (options) => {
+        window.__savePicker.calls.push(options);
+        return {
+          createWritable: async () => ({
+            write: async (data) => { window.__savePicker.written = data; },
+            close: async () => {},
+          }),
+        };
+      };
+    });
+    await page.goto(APP_URL);
+    await page.getByRole('button', { name: /Manage Sections/ }).click();
+    await page.getByRole('button', { name: 'Export Config' }).click();
+
+    const picker = await page.evaluate(() => window.__savePicker);
+    expect(picker.calls).toHaveLength(1);
+    expect(picker.calls[0].suggestedName).toBe('checkride-flashcards-config.json');
+
+    const exported = JSON.parse(picker.written);
+    expect(exported.map((d) => d.deck)).toEqual(['Deck A']);
+    expect(exported[0].sections.map((s) => s.name)).toEqual(['Alpha', 'Bravo', 'Charlie']);
+  });
+
+  test('Export Config does not fall back to a silent download if the save prompt is cancelled', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
+    });
+    await page.addInitScript(() => {
+      window.showSaveFilePicker = async () => {
+        throw new DOMException('The user aborted a request.', 'AbortError');
+      };
+    });
+    await page.goto(APP_URL);
+    await page.getByRole('button', { name: /Manage Sections/ }).click();
+
+    let downloadFired = false;
+    page.on('download', () => { downloadFired = true; });
+    await page.getByRole('button', { name: 'Export Config' }).click();
+    await page.waitForTimeout(300);
+    expect(downloadFired).toBe(false);
+  });
+
+  test('Export Config falls back to a plain download when the File System Access API is unavailable', async ({ page }) => {
+    await page.route(CONFIG_ROUTE, (route) => {
+      route.fulfill({ contentType: 'application/json', body: JSON.stringify(ORDERED_DECK) });
+    });
+    // Simulate a browser without the File System Access API (e.g. Firefox/Safari).
+    await page.addInitScript(() => { delete window.showSaveFilePicker; });
     await page.goto(APP_URL);
     await page.getByRole('button', { name: /Manage Sections/ }).click();
 
@@ -204,7 +324,7 @@ test.describe('Checkride Flashcards app', () => {
     await page.locator('input[type="file"]').setInputFiles(tmpFile);
     await page.getByRole('button', { name: 'Replace My Sections' }).click();
 
-    await expect(page.locator('.deck-group-title')).toHaveText(['Deck Z', 'Deck A']);
+    await expect(page.locator('.deck-group-title')).toContainText(['Deck Z', 'Deck A']);
     await expect(page.locator('.section-row .name')).toHaveText(['Zulu', 'Charlie', 'Alpha', 'Bravo']);
 
     fs.unlinkSync(tmpFile);

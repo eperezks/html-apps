@@ -418,8 +418,11 @@
     white-space: nowrap;
   }
   .status-pill.on{ border-color: var(--good); color: var(--good-text); }
-  .deck-group{ margin-bottom: 20px; }
+  .deck-group{ margin-bottom: 20px; border-radius: 8px; }
   .deck-group-title{
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-family: "IBM Plex Mono", monospace;
     font-size: 11.5px;
     text-transform: uppercase;
@@ -432,7 +435,6 @@
   .section-row{
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 12px;
     padding: 12px 14px;
     background: var(--surface);
@@ -440,7 +442,21 @@
     border-radius: 8px;
     margin-bottom: 8px;
   }
-  .section-row .info{ min-width: 0; }
+  .section-row .info{ flex: 1; min-width: 0; }
+  .drag-handle{
+    flex: none;
+    cursor: grab;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1;
+    user-select: none;
+    touch-action: none;
+    padding: 2px 4px;
+  }
+  .drag-handle:active{ cursor: grabbing; }
+  .deck-group.dragging, .section-row.dragging, .item-row.dragging{ opacity: 0.4; }
+  .deck-group.drag-over{ outline: 2px dashed var(--accent); outline-offset: 4px; }
+  .section-row.drag-over{ outline: 2px dashed var(--accent); outline-offset: -2px; }
   .section-row .info .name{
     font-weight: 600;
     font-size: 14.5px;
@@ -513,7 +529,7 @@
   .item-rows{ display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
   .item-row{
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: auto 1fr 1fr auto;
     gap: 8px;
     align-items: center;
   }
@@ -533,7 +549,8 @@
     line-height: 1;
   }
   @media (max-width: 520px){
-    .item-row{ grid-template-columns: 1fr; }
+    .item-row{ grid-template-columns: auto 1fr; }
+    .item-row input{ grid-column: 2; }
     .row-remove{ justify-self: end; }
   }
   .form-error{
@@ -1251,12 +1268,63 @@
       return;
     }
 
+    // Drag-and-drop reordering. dragSource holds the payload set on
+    // dragstart; a drop only acts when its container's `kind` matches, and
+    // (for sections) only within the same deck — moving a section to a
+    // different checklist is still done via the Edit form's deck field.
+    var dragSource = null;
+    function attachDragHandle(handle, container, kind, getPayload, onDrop){
+      handle.draggable = true;
+      handle.addEventListener("dragstart", function(e){
+        dragSource = getPayload();
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain", "");
+        container.classList.add("dragging");
+      });
+      handle.addEventListener("dragend", function(){
+        container.classList.remove("dragging");
+        var overEls = app.querySelectorAll(".drag-over");
+        for (var i = 0; i < overEls.length; i++) overEls[i].classList.remove("drag-over");
+        dragSource = null;
+      });
+      container.addEventListener("dragover", function(e){
+        if (!dragSource || dragSource.kind !== kind) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+        container.classList.add("drag-over");
+      });
+      container.addEventListener("dragleave", function(){ container.classList.remove("drag-over"); });
+      container.addEventListener("drop", function(e){
+        if (!dragSource || dragSource.kind !== kind) return;
+        e.preventDefault();
+        container.classList.remove("drag-over");
+        onDrop(dragSource);
+        dragSource = null;
+      });
+    }
+
     var canDelete = SECTIONS.length > 1;
     DECKS.forEach(function(deck, di){
       var group = el("div", "deck-group");
-      group.appendChild(el("div", "deck-group-title", deck.deck));
+      var titleBar = el("div", "deck-group-title");
+      var deckHandle = el("span", "drag-handle", "⠿");
+      deckHandle.setAttribute("aria-label", "Drag to reorder this checklist");
+      deckHandle.title = "Drag to reorder";
+      titleBar.appendChild(deckHandle);
+      titleBar.appendChild(document.createTextNode(deck.deck));
+      group.appendChild(titleBar);
+      attachDragHandle(deckHandle, group, "deck", function(){ return { kind: "deck", index: di }; }, function(src){
+        if (src.index === di) return;
+        var moved = DECKS.splice(src.index, 1)[0];
+        DECKS.splice(di, 0, moved);
+        persist();
+      });
       deck.sections.forEach(function(sec, si){
         var row = el("div", "section-row");
+        var sectionHandle = el("span", "drag-handle", "⠿");
+        sectionHandle.setAttribute("aria-label", "Drag to reorder this section");
+        sectionHandle.title = "Drag to reorder";
+        row.appendChild(sectionHandle);
         var info = el("div", "info");
         info.appendChild(el("div", "name", sec.name + (sec.tagline ? " — “" + sec.tagline + "”" : "")));
         info.appendChild(el("div", "meta", sec.items.length + (sec.items.length === 1 ? " item" : " items")));
@@ -1281,6 +1349,13 @@
           actions.appendChild(delBtn);
         }
         row.appendChild(actions);
+        attachDragHandle(sectionHandle, row, "section", function(){ return { kind: "section", deckIndex: di, index: si }; }, function(src){
+          if (src.deckIndex !== di || src.index === si) return;
+          var sections = DECKS[di].sections;
+          var moved = sections.splice(src.index, 1)[0];
+          sections.splice(si, 0, moved);
+          persist();
+        });
         group.appendChild(row);
       });
       app.appendChild(group);
@@ -1289,6 +1364,26 @@
 
   async function exportConfig(){
     var json = JSON.stringify(DECKS, null, 2);
+    // The File System Access API lets the browser itself prompt for a save
+    // location/filename (Chrome, Edge, Opera). Tried first since it's the
+    // most direct way to ask the user where to export to.
+    if (window.showSaveFilePicker){
+      try {
+        var handle = await window.showSaveFilePicker({
+          suggestedName: "checkride-flashcards-config.json",
+          types: [{ description: "JSON file", accept: { "application/json": [".json"] } }]
+        });
+        var writable = await handle.createWritable();
+        await writable.write(json);
+        await writable.close();
+        return;
+      } catch (e){
+        // The user closing/cancelling the picker is a deliberate "don't
+        // export" — don't fall through to a silent download instead.
+        if (e && e.name === "AbortError") return;
+        /* any other failure (e.g. permission denied) falls through below */
+      }
+    }
     if (DL){
       try { await DL.save({ filename: "checkride-flashcards-config.json", data: json }); return; }
       catch (e){ /* fall through to the plain-browser download below */ }
@@ -1371,8 +1466,16 @@
 
     form.appendChild(el("label", "field-label", "Items — Challenge / Response"));
     var itemsWrap = el("div", "item-rows");
+    // Item order is read straight off the DOM at Save time (see the
+    // saveBtn handler below), so reordering here just needs to move the
+    // actual row element — there's no separate array to keep in sync.
+    var draggedItemRow = null;
     function addRow(front, back){
       var row = el("div", "item-row");
+      var handle = el("span", "drag-handle", "⠿");
+      handle.setAttribute("aria-label", "Drag to reorder this item");
+      handle.title = "Drag to reorder";
+      handle.draggable = true;
       var f = document.createElement("input");
       f.type = "text"; f.placeholder = "Challenge (e.g. Mixture)"; f.value = front || "";
       var b = document.createElement("input");
@@ -1381,10 +1484,32 @@
       rm.type = "button";
       rm.setAttribute("aria-label", "Remove this item");
       rm.addEventListener("click", function(){ row.remove(); });
+      row.appendChild(handle);
       row.appendChild(f);
       row.appendChild(b);
       row.appendChild(rm);
       itemsWrap.appendChild(row);
+
+      handle.addEventListener("dragstart", function(e){
+        draggedItemRow = row;
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain", "");
+        row.classList.add("dragging");
+      });
+      handle.addEventListener("dragend", function(){
+        row.classList.remove("dragging");
+        draggedItemRow = null;
+      });
+      row.addEventListener("dragover", function(e){
+        if (!draggedItemRow || draggedItemRow === row) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+        var rect = row.getBoundingClientRect();
+        var before = (e.clientY - rect.top) < rect.height / 2;
+        itemsWrap.insertBefore(draggedItemRow, before ? row : row.nextSibling);
+      });
+      row.addEventListener("drop", function(e){ e.preventDefault(); });
+
       return row;
     }
     if (sec && sec.items.length){
