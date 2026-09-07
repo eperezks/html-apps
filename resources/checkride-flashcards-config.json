@@ -1,0 +1,1205 @@
+[
+  {
+    "deck": "Deck 1 — Pre-Flight Inspection",
+    "sections": [
+      {
+        "name": "Right Wing",
+        "items": [
+          [
+            "Wing Flaps",
+            "Strain (5 sumps)"
+          ],
+          [
+            "Wing Flaps",
+            "Secure"
+          ],
+          [
+            "Wing Tip & Leading Edge",
+            "Secure & Free"
+          ],
+          [
+            "Tie-down Rope",
+            "Check"
+          ],
+          [
+            "Main Landing Gear Tire & Brake",
+            "Remove"
+          ],
+          [
+            "Main Landing Gear Tire & Brake",
+            "Check condition, pressure"
+          ],
+          [
+            "Fuel Quantity (verify with fuel stick)",
+            "Visual"
+          ],
+          [
+            "Fuel Cap",
+            "Secure"
+          ]
+        ]
+      },
+      {
+        "name": "Engine & Nose",
+        "items": [
+          [
+            "Fuselage Fuel Sump",
+            "Drain (sump 3 places)"
+          ],
+          [
+            "Oil Level",
+            "Check (5–6 qts)"
+          ],
+          [
+            "Cowling",
+            "Secure"
+          ],
+          [
+            "Propeller & Spinner",
+            "Condition & Security"
+          ],
+          [
+            "Air Inlets",
+            "Unobstructed"
+          ],
+          [
+            "Air Filters",
+            "Unobstructed"
+          ],
+          [
+            "Alternator Belt",
+            "Secure"
+          ],
+          [
+            "Cowling Interior",
+            "Check condition"
+          ],
+          [
+            "Nose Wheel Assembly",
+            "Condition & Security"
+          ],
+          [
+            "Static Port",
+            "Unobstructed"
+          ]
+        ]
+      },
+      {
+        "name": "Left Wing",
+        "items": [
+          [
+            "Pitot Tube",
+            "Unobstructed"
+          ],
+          [
+            "Tie-down Rope",
+            "Remove"
+          ],
+          [
+            "Fuel Tank Vent",
+            "Unobstructed"
+          ],
+          [
+            "Stall Warning Opening",
+            "Unobstructed"
+          ],
+          [
+            "Wing Leading Edge & Tip",
+            "Check"
+          ],
+          [
+            "Aileron",
+            "Secure & Free"
+          ],
+          [
+            "Flap",
+            "Secure"
+          ],
+          [
+            "Main Landing Gear Tire & Brake",
+            "Check condition, pressure"
+          ],
+          [
+            "Wing Fuel Sumps",
+            "Drain (5 sumps)"
+          ],
+          [
+            "Fuel Quantity (verify with fuel stick)",
+            "Visual"
+          ],
+          [
+            "Fuel Cap",
+            "Secure"
+          ]
+        ]
+      },
+      {
+        "name": "Before Start",
+        "items": [
+          [
+            "Preflight Inspection",
+            "Complete"
+          ],
+          [
+            "Passenger Briefing",
+            "Complete"
+          ],
+          [
+            "Seats & Belts",
+            "Upright & Secure"
+          ],
+          [
+            "Beacon",
+            "ON"
+          ],
+          [
+            "Brakes",
+            "Test & Hold"
+          ]
+        ]
+      },
+      {
+        "name": "Cabintest",
+        "items": [
+          [
+            "Inspection Status",
+            "Check"
+          ],
+          [
+            "All Covers, Cowl Plugs, & Pitot Cover",
+            "Remove"
+          ],
+          [
+            "Windshields",
+            "Check"
+          ],
+          [
+            "Hobbs / Tach / VOR Check",
+            "Check"
+          ],
+          [
+            "Documents (AROW)",
+            "Check"
+          ],
+          [
+            "Control Lock",
+            "Remove, put in left pocket"
+          ],
+          [
+            "Flight Controls",
+            "Free & Correct"
+          ],
+          [
+            "Fuel Shut-Off Valve",
+            "IN"
+          ],
+          [
+            "Fuel Selector",
+            "BOTH"
+          ],
+          [
+            "Trim Tab",
+            "Set Take-Off"
+          ],
+          [
+            "Alt Static",
+            "Check"
+          ],
+          [
+            "Panel and Glare Shields",
+            "OFF (counterclockwise)"
+          ],
+          [
+            "Circuit Breakers",
+            "IN"
+          ],
+          [
+            "ALL Electrical Switches (except BCN)",
+            "OFF"
+          ],
+          [
+            "Ignition Switch",
+            "OFF"
+          ],
+          [
+            "MASTER Switch",
+            "ON"
+          ],
+          [
+            "Flaps",
+            "Extend"
+          ],
+          [
+            "Volts (-24V)",
+            "Check"
+          ],
+          [
+            "Fuel Quantity",
+            "Check"
+          ],
+          [
+            "Annunciator Panel",
+            "Test lights working"
+          ],
+          [
+            "AVIONICS Master",
+            "ON"
+          ],
+          [
+            "Avionics Cooling Fan",
+            "Verify ON"
+          ],
+          [
+            "AVIONICS Master",
+            "OFF"
+          ],
+          [
+            "Pitot Heat",
+            "Check as necessary"
+          ],
+          [
+            "Exterior Lights",
+            "Check"
+          ],
+          [
+            "MASTER Switch",
+            "OFF"
+          ]
+        ]
+      },
+      {
+        "name": "Exterior — Aft Fuselage & Empennagetest",
+        "items": [
+          [
+            "Baggage Door",
+            "Check & Secure"
+          ],
+          [
+            "Fuselage (left side and under left side)",
+            "Check"
+          ],
+          [
+            "Horizontal Stabilizer (left side)",
+            "Check"
+          ],
+          [
+            "Elevator (left side)",
+            "Secure & Free"
+          ],
+          [
+            "Vertical Stabilizer (left side)",
+            "Check"
+          ],
+          [
+            "Beacon & Position Lights",
+            "Check"
+          ],
+          [
+            "Rudder",
+            "Secure & Free"
+          ],
+          [
+            "Tail Tie-down",
+            "Remove"
+          ],
+          [
+            "Tail Skid",
+            "Check for marks"
+          ],
+          [
+            "Vertical Stabilizer (right side)",
+            "Check"
+          ],
+          [
+            "Elevator (right side)",
+            "Secure & Free"
+          ],
+          [
+            "Trim Tab",
+            "Secure"
+          ],
+          [
+            "Horizontal Stabilizer (right side)",
+            "Check"
+          ],
+          [
+            "Fuselage (right side and under right side)",
+            "Check"
+          ],
+          [
+            "Nav/Com Antennas",
+            "Check"
+          ],
+          [
+            "ELT Antenna",
+            "Check"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 2 — Engine Start",
+    "sections": [
+      {
+        "name": "Engine Start",
+        "items": [
+          [
+            "Key",
+            "In Ignition Switch"
+          ],
+          [
+            "Master Switch",
+            "ON"
+          ],
+          [
+            "Mixture",
+            "Idle Cut Off"
+          ]
+        ]
+      },
+      {
+        "name": "Prime The Engine",
+        "tagline": "As Required",
+        "items": [
+          [
+            "Throttle",
+            "Open 1 inch"
+          ],
+          [
+            "Auxiliary Fuel Pump",
+            "ON"
+          ],
+          [
+            "Mixture",
+            "RICH until positive fuel flow in warm temps / longer for cold temps"
+          ],
+          [
+            "Mixture",
+            "IDLE CUT OFF"
+          ],
+          [
+            "Auxiliary Fuel Pump",
+            "OFF"
+          ]
+        ]
+      },
+      {
+        "name": "Starting",
+        "items": [
+          [
+            "Throttle",
+            "Set no more than 1/8 inch"
+          ],
+          [
+            "Area",
+            "CLEAR!"
+          ],
+          [
+            "Ignition",
+            "Engage until engine starts"
+          ],
+          [
+            "Mixture as Engine Starts",
+            "Advance smoothly"
+          ],
+          [
+            "Throttle",
+            "1000 RPM MAX"
+          ],
+          [
+            "Oil Pressure",
+            "Check Alive"
+          ],
+          [
+            "Ammeter",
+            "Verify Charging"
+          ],
+          [
+            "Flaps Up",
+            "Check Ammeter Discharge"
+          ],
+          [
+            "Mixture",
+            "Lean (to increase RPM)"
+          ],
+          [
+            "Volts",
+            "27.0–28.4 V"
+          ],
+          [
+            "Avionics Master",
+            "ON"
+          ],
+          [
+            "Transponder",
+            "ALT"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 3 — Before Taxi",
+    "sections": [
+      {
+        "name": "Before Taxi",
+        "items": [
+          [
+            "Clocks",
+            "Check/Set"
+          ],
+          [
+            "Weather Information",
+            "Obtain"
+          ],
+          [
+            "Altimeter",
+            "Set"
+          ],
+          [
+            "COM 1 / COM 2",
+            "Set/Check"
+          ],
+          [
+            "NAV and GPS",
+            "Set/Check"
+          ],
+          [
+            "Autopilot",
+            "OFF"
+          ],
+          [
+            "Clearance",
+            "Obtain"
+          ],
+          [
+            "Transponder",
+            "Set"
+          ],
+          [
+            "Brakes",
+            "Idle Motion Check"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 4 — Taxi (IFR)",
+    "sections": [
+      {
+        "name": "Taxi (IFR)",
+        "items": [
+          [
+            "Compass",
+            "Free & Correct"
+          ],
+          [
+            "Airspeed Indicator",
+            "Reads Zero"
+          ],
+          [
+            "Attitude Indicator",
+            "Leans less than 5°"
+          ],
+          [
+            "Altimeter",
+            "Set & within 75'"
+          ],
+          [
+            "Turn Coordinator / Inclinometer",
+            "Free & Correct"
+          ],
+          [
+            "Directional Gyro",
+            "Free & Correct"
+          ],
+          [
+            "Vertical Speed Indicator",
+            "Note position"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 5 — Fire During Engine Start",
+    "sections": [
+      {
+        "name": "If Engine Starts",
+        "items": [
+          [
+            "Mixture",
+            "Idle Cut Off"
+          ],
+          [
+            "Fuel Shut-Off Valve",
+            "Pull Out (Off)"
+          ],
+          [
+            "Magnetos and Master",
+            "OFF"
+          ],
+          [
+            "After securing engine",
+            "Evacuate Cabin"
+          ]
+        ]
+      },
+      {
+        "name": "If Engine Doesn't Start",
+        "items": [
+          [
+            "Throttle",
+            "FULL"
+          ],
+          [
+            "Mixture",
+            "Idle Cut Off"
+          ],
+          [
+            "Fuel Shut-Off Valve",
+            "Pull Out (Off)"
+          ],
+          [
+            "Fuel Pump",
+            "OFF"
+          ],
+          [
+            "Magnetos and Master",
+            "OFF"
+          ],
+          [
+            "Fire Extinguisher",
+            "Obtain"
+          ],
+          [
+            "After securing",
+            "Evacuate Cabin"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 6 — Engine Runup",
+    "sections": [
+      {
+        "name": "Engine Runup",
+        "items": [
+          [
+            "Nose Wheel",
+            "Straight"
+          ],
+          [
+            "Brakes",
+            "Set"
+          ],
+          [
+            "Run-up Area",
+            "Free of Debris"
+          ],
+          [
+            "Field Conditions",
+            "Free & Correct"
+          ],
+          [
+            "Oil Temperature",
+            "Off the bottom"
+          ],
+          [
+            "Mixture",
+            "RICH"
+          ],
+          [
+            "Throttle",
+            "1800 RPM"
+          ],
+          [
+            "Fuel Quantity",
+            "As expected"
+          ],
+          [
+            "Oil Temp",
+            "Off the bottom peg"
+          ],
+          [
+            "Oil Pressure",
+            "In Green Arc"
+          ],
+          [
+            "EGT",
+            "Check"
+          ],
+          [
+            "Fuel Flow",
+            "Check"
+          ],
+          [
+            "Ammeter",
+            "Check (if installed)"
+          ],
+          [
+            "Magnetos",
+            "Check"
+          ],
+          [
+            "Magneto check limits",
+            "Max drop 150; max difference 50"
+          ],
+          [
+            "Throttle",
+            "Idle check, then 1000 RPM"
+          ],
+          [
+            "Mixture",
+            "Lean"
+          ],
+          [
+            "Throttle Friction",
+            "Adjust"
+          ],
+          [
+            "Flaps",
+            "0° to 10° for Take-Off"
+          ],
+          [
+            "Doors",
+            "Secure"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 7 — IFR Checks",
+    "sections": [
+      {
+        "name": "IFR Checks",
+        "items": [
+          [
+            "Departure Procedure",
+            "Brief"
+          ],
+          [
+            "RAIM",
+            "Check"
+          ],
+          [
+            "Pitot Heat",
+            "As required"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 8 — Takeoff",
+    "sections": [
+      {
+        "name": "Take Off",
+        "tagline": "Lights, Camera, Action",
+        "items": [
+          [
+            "Strobes & Landing Light",
+            "ON"
+          ],
+          [
+            "Transponder",
+            "ALTITUDE"
+          ],
+          [
+            "Mixture",
+            "RICH"
+          ],
+          [
+            "Time",
+            "Start Clock"
+          ],
+          [
+            "Heading Indicator",
+            "Agrees with RUNWAY"
+          ],
+          [
+            "Throttle",
+            "Full Open"
+          ],
+          [
+            "Elevator Control",
+            "Lift Nose Wheel"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 9 — Climb",
+    "sections": [
+      {
+        "name": "Climb",
+        "items": [
+          [
+            "Airspeed",
+            "Vy — Best Rate of Climb"
+          ],
+          [
+            "System Gauges",
+            "MONITOR during climb"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 10 — Cruise (Top of Climb)",
+    "sections": [
+      {
+        "name": "Cruise (Top of Climb)",
+        "tagline": "Pitch, Power, Trim",
+        "items": [
+          [
+            "Landing Light",
+            "OFF"
+          ],
+          [
+            "Power (per POH)",
+            "65% BHP"
+          ],
+          [
+            "Mixture (for any altitude)",
+            "LEAN 50° rich of peak EGT"
+          ],
+          [
+            "Elevator Trim",
+            "SET to relieve control forces"
+          ],
+          [
+            "System Gauges",
+            "MONITOR during cruise"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 11 — Approach (IFR)",
+    "sections": [
+      {
+        "name": "Approach (IFR)",
+        "tagline": "WIRE",
+        "items": [
+          [
+            "Weather",
+            "ATIS/ASOS/AWOS — Obtain"
+          ],
+          [
+            "Instruments",
+            "Altimeter/DG — Set"
+          ],
+          [
+            "Radios",
+            "COM/NAV/GPS/MRK BCN — Set and identify"
+          ],
+          [
+            "Environment",
+            "Approach Plate — systematically verify and brief"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 12 — Descent (Top of Descent)",
+    "sections": [
+      {
+        "name": "Descent (Top of Descent)",
+        "items": [
+          [
+            "Power",
+            "SET"
+          ],
+          [
+            "Mixture",
+            "As Required"
+          ],
+          [
+            "Weather (ATIS/ASOS/AWOS)",
+            "Obtain"
+          ],
+          [
+            "Altimeters",
+            "Set"
+          ],
+          [
+            "Crosswind Component",
+            "Evaluate"
+          ],
+          [
+            "Fuel Selector",
+            "Both"
+          ],
+          [
+            "Landing Light",
+            "ON"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 13 — Before Landing",
+    "sections": [
+      {
+        "name": "Before Landing",
+        "items": [
+          [
+            "Mixture",
+            "RICH"
+          ],
+          [
+            "Seats & Belts",
+            "Upright & Secure"
+          ],
+          [
+            "Autopilot",
+            "OFF"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 14 — Landing",
+    "sections": [
+      {
+        "name": "Landing",
+        "items": [
+          [
+            "Wing Flaps",
+            "As Desired"
+          ],
+          [
+            "Airspeed — Flaps Up",
+            "65–75 KIAS"
+          ],
+          [
+            "Airspeed — Flaps Down",
+            "60–70 KIAS"
+          ],
+          [
+            "Touchdown",
+            "MAIN WHEELS first"
+          ],
+          [
+            "Landing Roll",
+            "Lower Nose Wheel Gently"
+          ],
+          [
+            "Braking",
+            "Minimum Required"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 15 — Go-Around",
+    "sections": [
+      {
+        "name": "Go-Around",
+        "items": [
+          [
+            "Throttle",
+            "FULL OPEN"
+          ],
+          [
+            "Flaps",
+            "RETRACT 20° → 10° → 0°"
+          ],
+          [
+            "Climb",
+            "Speed as required"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 16 — After Landing",
+    "sections": [
+      {
+        "name": "After Landing — Clear of Runway and Stopped",
+        "items": [
+          [
+            "Flaps",
+            "Retract"
+          ],
+          [
+            "Mixture",
+            "LEAN"
+          ],
+          [
+            "Trim",
+            "Set for Takeoff"
+          ],
+          [
+            "Landing Light & Strobes",
+            "OFF"
+          ],
+          [
+            "Pitot Heat",
+            "OFF"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 17 — Parking",
+    "sections": [
+      {
+        "name": "Parking",
+        "items": [
+          [
+            "All Lights (except beacon)",
+            "OFF"
+          ],
+          [
+            "Throttle",
+            "1000 RPM"
+          ],
+          [
+            "Transponder",
+            "1200"
+          ],
+          [
+            "Avionics Master",
+            "OFF"
+          ],
+          [
+            "Mixture",
+            "Idle — cut off"
+          ],
+          [
+            "Magnetos (Ignition)",
+            "OFF, then remove key"
+          ],
+          [
+            "Master Switch",
+            "OFF"
+          ],
+          [
+            "Fuel Selector",
+            "Both"
+          ],
+          [
+            "Control Lock",
+            "Install"
+          ],
+          [
+            "Hobbs & Tach",
+            "Record"
+          ],
+          [
+            "Covers",
+            "As Required"
+          ],
+          [
+            "Chock/Tie-down",
+            "Required"
+          ],
+          [
+            "Tail Skid",
+            "Check for marks"
+          ],
+          [
+            "Tires",
+            "Check condition"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 18 — Power Loss",
+    "sections": [
+      {
+        "name": "Power Loss",
+        "items": [
+          [
+            "Airspeed — Best Glide",
+            "65 KIAS"
+          ],
+          [
+            "Best Place to Land",
+            "Locate"
+          ],
+          [
+            "Fuel Selector",
+            "Both"
+          ],
+          [
+            "Fuel Shut-Off Valve",
+            "In (On)"
+          ],
+          [
+            "Mixture",
+            "Full Rich"
+          ],
+          [
+            "Throttle",
+            "Full Forward"
+          ],
+          [
+            "Magnetos",
+            "BOTH"
+          ],
+          [
+            "Fuel Pump",
+            "On"
+          ],
+          [
+            "Master Switch",
+            "Check On"
+          ],
+          [
+            "Starter (if propeller stopped)",
+            "Engage"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 19 — If No Restart",
+    "sections": [
+      {
+        "name": "If No Restart — Emergency Landing",
+        "items": [
+          [
+            "Squawk",
+            "7700"
+          ],
+          [
+            "Communicate on Radio",
+            "121.5"
+          ],
+          [
+            "Mixture",
+            "Idle Cut-Off"
+          ],
+          [
+            "Fuel Shut-Off Valve",
+            "OUT (Off)"
+          ],
+          [
+            "Ignition Switch",
+            "OFF"
+          ],
+          [
+            "Flaps",
+            "As required"
+          ],
+          [
+            "Fuel Pump",
+            "OFF"
+          ],
+          [
+            "Fuel Selector",
+            "OFF"
+          ],
+          [
+            "Door",
+            "Unlatch"
+          ],
+          [
+            "Master",
+            "Off when landing assured"
+          ],
+          [
+            "Landing Speed",
+            "60 KIAS"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 20 — Electrical Fire",
+    "sections": [
+      {
+        "name": "Electrical Fire",
+        "items": [
+          [
+            "Master Switch",
+            "OFF"
+          ],
+          [
+            "Electrical Switches (except magnetos)",
+            "OFF"
+          ],
+          [
+            "Cabin Heat & Air",
+            "OFF"
+          ],
+          [
+            "Circuit Breakers",
+            "Check for faulty equipment, but don't reset"
+          ]
+        ]
+      },
+      {
+        "name": "If Fire Is Extinguished",
+        "items": [
+          [
+            "Essential Equipment",
+            "Turn ON one at a time"
+          ],
+          [
+            "Landing",
+            "Land as soon as practical"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 21 — Engine Fire in Flight",
+    "sections": [
+      {
+        "name": "Engine Fire in Flight",
+        "items": [
+          [
+            "Fuel Shut-Off Valve",
+            "OUT (Off)"
+          ],
+          [
+            "Mixture",
+            "Idle Cut-Off"
+          ],
+          [
+            "Throttle",
+            "Closed"
+          ],
+          [
+            "Master",
+            "OFF"
+          ],
+          [
+            "Cabin Heat & Air",
+            "OFF"
+          ],
+          [
+            "Airspeed",
+            "Highest permissible to extinguish fire"
+          ],
+          [
+            "Emergency Landing",
+            "Land"
+          ]
+        ]
+      }
+    ]
+  }
+]
