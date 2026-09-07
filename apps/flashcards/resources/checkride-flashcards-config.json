@@ -310,31 +310,6 @@
             "Secure"
           ]
         ]
-      },
-      {
-        "name": "Before Start",
-        "items": [
-          [
-            "Preflight Inspection",
-            "Complete"
-          ],
-          [
-            "Passenger Briefing",
-            "Complete"
-          ],
-          [
-            "Seats & Belts",
-            "Upright & Secure"
-          ],
-          [
-            "Beacon",
-            "ON"
-          ],
-          [
-            "Brakes",
-            "Test & Hold"
-          ]
-        ]
       }
     ]
   },
@@ -342,7 +317,33 @@
     "deck": "Deck 2 — Engine Start",
     "sections": [
       {
-        "name": "Engine Start",
+        "name": "Prime The Engine (Done)",
+        "items": [
+          [
+            "Throttle",
+            "Open 1 inch"
+          ],
+          [
+            "Auxiliary Fuel Pump",
+            "ON"
+          ],
+          [
+            "Mixture",
+            "RICH until positive fuel flow in warm temps / longer for cold temps"
+          ],
+          [
+            "Mixture",
+            "IDLE CUT OFF"
+          ],
+          [
+            "Auxiliary Fuel Pump",
+            "OFF"
+          ]
+        ],
+        "tagline": "As Required"
+      },
+      {
+        "name": "Engine Start (Done)",
         "items": [
           [
             "Key",
@@ -361,7 +362,7 @@
             "Set no more than 1/8 inch"
           ],
           [
-            "Area",
+            "Propellor Area",
             "CLEAR!"
           ],
           [
@@ -407,28 +408,27 @@
         ]
       },
       {
-        "name": "Prime The Engine",
-        "tagline": "As Required",
+        "name": "Before Start (Done)",
         "items": [
           [
-            "Throttle",
-            "Open 1 inch"
+            "Preflight Inspection",
+            "Complete"
           ],
           [
-            "Auxiliary Fuel Pump",
+            "Passenger Briefing",
+            "Complete"
+          ],
+          [
+            "Seats & Belts",
+            "Upright & Secure"
+          ],
+          [
+            "Beacon",
             "ON"
           ],
           [
-            "Mixture",
-            "RICH until positive fuel flow in warm temps / longer for cold temps"
-          ],
-          [
-            "Mixture",
-            "IDLE CUT OFF"
-          ],
-          [
-            "Auxiliary Fuel Pump",
-            "OFF"
+            "Brakes",
+            "Test & Hold"
           ]
         ]
       }

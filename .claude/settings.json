@@ -10,11 +10,13 @@
       "Bash(node --check /Users/eperez/Documents/repos/html-apps/apps/flashcards/index.html)",
       "Bash(git -C /Users/eperez/Documents/repos/html-apps status --short)",
       "Bash(cp apps/flashcards/index.html /tmp/index.html.bak)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(mkdir -p /Users/eperez/Documents/repos/html-apps/.vscode)"
     ],
     "additionalDirectories": [
       "/Users/eperez/Documents/repos/html-apps/apps",
-      "/tmp"
+      "/tmp",
+      "/Users/eperez/Documents/repos/html-apps"
     ]
   }
 }
