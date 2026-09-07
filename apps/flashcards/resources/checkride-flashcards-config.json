@@ -3,6 +3,184 @@
     "deck": "Deck 1 — Pre-Flight Inspection",
     "sections": [
       {
+        "name": "Cabin",
+        "items": [
+          [
+            "Inspection Status",
+            "Check"
+          ],
+          [
+            "All Covers, Cowl Plugs, & Pitot Cover",
+            "Remove"
+          ],
+          [
+            "Windshields",
+            "Check"
+          ],
+          [
+            "Hobbs / Tach / VOR Check",
+            "Check"
+          ],
+          [
+            "Documents (AROW)",
+            "Check"
+          ],
+          [
+            "Control Lock",
+            "Remove, put in left pocket"
+          ],
+          [
+            "Flight Controls",
+            "Free & Correct"
+          ],
+          [
+            "Fuel Shut-Off Valve",
+            "IN"
+          ],
+          [
+            "Fuel Selector",
+            "BOTH"
+          ],
+          [
+            "Trim Tab",
+            "Set Take-Off"
+          ],
+          [
+            "Alt Static",
+            "Check"
+          ],
+          [
+            "Panel and Glare Shields",
+            "OFF (counterclockwise)"
+          ],
+          [
+            "Circuit Breakers",
+            "IN"
+          ],
+          [
+            "ALL Electrical Switches (except BCN)",
+            "OFF"
+          ],
+          [
+            "Ignition Switch",
+            "OFF"
+          ],
+          [
+            "MASTER Switch",
+            "ON"
+          ],
+          [
+            "Flaps",
+            "Extend"
+          ],
+          [
+            "Volts (-24V)",
+            "Check"
+          ],
+          [
+            "Fuel Quantity",
+            "Check"
+          ],
+          [
+            "Annunciator Panel",
+            "Test lights working"
+          ],
+          [
+            "AVIONICS Master",
+            "ON"
+          ],
+          [
+            "Avionics Cooling Fan",
+            "Verify ON"
+          ],
+          [
+            "AVIONICS Master",
+            "OFF"
+          ],
+          [
+            "Pitot Heat",
+            "Check as necessary"
+          ],
+          [
+            "Exterior Lights",
+            "Check"
+          ],
+          [
+            "MASTER Switch",
+            "OFF"
+          ]
+        ]
+      },
+      {
+        "name": "Exterior — Aft Fuselage & Empennage",
+        "items": [
+          [
+            "Baggage Door",
+            "Check & Secure"
+          ],
+          [
+            "Fuselage (left side and under left side)",
+            "Check"
+          ],
+          [
+            "Horizontal Stabilizer (left side)",
+            "Check"
+          ],
+          [
+            "Elevator (left side)",
+            "Secure & Free"
+          ],
+          [
+            "Vertical Stabilizer (left side)",
+            "Check"
+          ],
+          [
+            "Beacon & Position Lights",
+            "Check"
+          ],
+          [
+            "Rudder",
+            "Secure & Free"
+          ],
+          [
+            "Tail Tie-down",
+            "Remove"
+          ],
+          [
+            "Tail Skid",
+            "Check for marks"
+          ],
+          [
+            "Vertical Stabilizer (right side)",
+            "Check"
+          ],
+          [
+            "Elevator (right side)",
+            "Secure & Free"
+          ],
+          [
+            "Trim Tab",
+            "Secure"
+          ],
+          [
+            "Horizontal Stabilizer (right side)",
+            "Check"
+          ],
+          [
+            "Fuselage (right side and under right side)",
+            "Check"
+          ],
+          [
+            "Nav/Com Antennas",
+            "Check"
+          ],
+          [
+            "ELT Antenna",
+            "Check"
+          ]
+        ]
+      },
+      {
         "name": "Right Wing",
         "items": [
           [
@@ -155,184 +333,6 @@
           [
             "Brakes",
             "Test & Hold"
-          ]
-        ]
-      },
-      {
-        "name": "Cabintest",
-        "items": [
-          [
-            "Inspection Status",
-            "Check"
-          ],
-          [
-            "All Covers, Cowl Plugs, & Pitot Cover",
-            "Remove"
-          ],
-          [
-            "Windshields",
-            "Check"
-          ],
-          [
-            "Hobbs / Tach / VOR Check",
-            "Check"
-          ],
-          [
-            "Documents (AROW)",
-            "Check"
-          ],
-          [
-            "Control Lock",
-            "Remove, put in left pocket"
-          ],
-          [
-            "Flight Controls",
-            "Free & Correct"
-          ],
-          [
-            "Fuel Shut-Off Valve",
-            "IN"
-          ],
-          [
-            "Fuel Selector",
-            "BOTH"
-          ],
-          [
-            "Trim Tab",
-            "Set Take-Off"
-          ],
-          [
-            "Alt Static",
-            "Check"
-          ],
-          [
-            "Panel and Glare Shields",
-            "OFF (counterclockwise)"
-          ],
-          [
-            "Circuit Breakers",
-            "IN"
-          ],
-          [
-            "ALL Electrical Switches (except BCN)",
-            "OFF"
-          ],
-          [
-            "Ignition Switch",
-            "OFF"
-          ],
-          [
-            "MASTER Switch",
-            "ON"
-          ],
-          [
-            "Flaps",
-            "Extend"
-          ],
-          [
-            "Volts (-24V)",
-            "Check"
-          ],
-          [
-            "Fuel Quantity",
-            "Check"
-          ],
-          [
-            "Annunciator Panel",
-            "Test lights working"
-          ],
-          [
-            "AVIONICS Master",
-            "ON"
-          ],
-          [
-            "Avionics Cooling Fan",
-            "Verify ON"
-          ],
-          [
-            "AVIONICS Master",
-            "OFF"
-          ],
-          [
-            "Pitot Heat",
-            "Check as necessary"
-          ],
-          [
-            "Exterior Lights",
-            "Check"
-          ],
-          [
-            "MASTER Switch",
-            "OFF"
-          ]
-        ]
-      },
-      {
-        "name": "Exterior — Aft Fuselage & Empennagetest",
-        "items": [
-          [
-            "Baggage Door",
-            "Check & Secure"
-          ],
-          [
-            "Fuselage (left side and under left side)",
-            "Check"
-          ],
-          [
-            "Horizontal Stabilizer (left side)",
-            "Check"
-          ],
-          [
-            "Elevator (left side)",
-            "Secure & Free"
-          ],
-          [
-            "Vertical Stabilizer (left side)",
-            "Check"
-          ],
-          [
-            "Beacon & Position Lights",
-            "Check"
-          ],
-          [
-            "Rudder",
-            "Secure & Free"
-          ],
-          [
-            "Tail Tie-down",
-            "Remove"
-          ],
-          [
-            "Tail Skid",
-            "Check for marks"
-          ],
-          [
-            "Vertical Stabilizer (right side)",
-            "Check"
-          ],
-          [
-            "Elevator (right side)",
-            "Secure & Free"
-          ],
-          [
-            "Trim Tab",
-            "Secure"
-          ],
-          [
-            "Horizontal Stabilizer (right side)",
-            "Check"
-          ],
-          [
-            "Fuselage (right side and under right side)",
-            "Check"
-          ],
-          [
-            "Nav/Com Antennas",
-            "Check"
-          ],
-          [
-            "ELT Antenna",
-            "Check"
           ]
         ]
       }

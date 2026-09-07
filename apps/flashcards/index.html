@@ -983,26 +983,32 @@
     return { decks: data.length, sections: sections, items: items };
   }
 
+  // Returns { decks, fromDefault } — fromDefault is true only when neither
+  // an embedded publish nor a local edit was found, meaning DECKS is still
+  // sitting on the built-in factory data and is eligible to be replaced by
+  // resources/checkride-flashcards-config.json once that loads (see the
+  // fetch below).
   function loadInitialDecks(){
     try {
       var tag = document.getElementById("decks-data");
       var raw = tag && tag.textContent.trim();
       if (raw){
         var embedded = JSON.parse(raw);
-        if (validateDecks(embedded)) return embedded;
+        if (validateDecks(embedded)) return { decks: embedded, fromDefault: false };
       }
     } catch (e){ /* fall through */ }
     try {
       var stored = localStorage.getItem(STORAGE_KEY);
       if (stored){
         var parsed = JSON.parse(stored);
-        if (validateDecks(parsed)) return parsed;
+        if (validateDecks(parsed)) return { decks: parsed, fromDefault: false };
       }
     } catch (e){ /* fall through */ }
-    return deepClone(FACTORY_DECKS);
+    return { decks: deepClone(FACTORY_DECKS), fromDefault: true };
   }
 
-  var DECKS = loadInitialDecks();
+  var initialLoad = loadInitialDecks();
+  var DECKS = initialLoad.decks;
 
   var SECTIONS = [];
   var ALL_ITEMS = [];
@@ -1035,6 +1041,28 @@
       DECKS.length + " checklists · " + SECTIONS.length + " sections · " + ALL_ITEMS.length + " items";
   }
   rebuildIndex();
+
+  // FACTORY_DECKS above is an inline fallback copy of
+  // resources/checkride-flashcards-config.json, kept so the app still has
+  // data the instant it's opened, including directly from disk (file://),
+  // where fetching a local file is blocked by the browser. When the app is
+  // served over HTTP and no embedded publish or local edit takes priority,
+  // this fetch picks up that file's current contents — the canonical
+  // default deck set — so editing the file is enough to change what new
+  // users see, without needing to touch this script. Any fetch failure
+  // (file://, offline, missing file) is silently ignored and the app just
+  // keeps running on the embedded FACTORY_DECKS copy.
+  if (initialLoad.fromDefault){
+    fetch("resources/checkride-flashcards-config.json")
+      .then(function(res){ if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+      .then(function(data){
+        if (!validateDecks(data)) return;
+        DECKS = data;
+        rebuildIndex();
+        if (state.view === "home") render();
+      })
+      .catch(function(){ /* keep the embedded FACTORY_DECKS defaults */ });
+  }
 
   function saveLocal(){
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(DECKS)); }

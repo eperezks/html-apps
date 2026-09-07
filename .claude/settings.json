@@ -3,7 +3,10 @@
     "allow": [
       "Bash(mkdir -p /Users/eperez/Documents/repos/html-apps/apps/flashcards)",
       "Bash(npm -v)",
-      "Bash(npx playwright *)"
+      "Bash(npx playwright *)",
+      "Bash(node -e ' *)",
+      "Bash(git -C /Users/eperez/Documents/repos/html-apps status)",
+      "Bash(git -C /Users/eperez/Documents/repos/html-apps diff .claude/settings.json)"
     ],
     "additionalDirectories": [
       "/Users/eperez/Documents/repos/html-apps/apps"
