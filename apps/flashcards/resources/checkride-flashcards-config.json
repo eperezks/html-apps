@@ -762,7 +762,7 @@
           ],
           [
             "Power (per POH)",
-            "65% BHP"
+            "65% BHP (2100 - 2700 RPM)"
           ],
           [
             "Mixture (for any altitude)",
@@ -1381,6 +1381,40 @@
           [
             "D",
             "Directional Gyro — Heading indicator"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "deck": "Deck 23 - Miscellaneous",
+    "sections": [
+      {
+        "name": "Flying Ratios",
+        "items": [
+          [
+            "Vx",
+            "Best Angle of Climb (62 knots) - Highest Altitude in shortest amount of DISTANCE."
+          ],
+          [
+            "Vy",
+            "Best Rate of Climb (74 knots) - Highest Altitude in shortest amount of TIME."
+          ],
+          [
+            "Pitch when taking off",
+            "~10 degrees when taking off"
+          ],
+          [
+            "APT - Order of operations for power management",
+            "Attitude / Power / Trim"
+          ],
+          [
+            "Air to Air Frequency",
+            "122.75"
+          ],
+          [
+            "Bank Angle Classifications",
+            "Shallow ~20, Medium ~20-40, Steep ~45+"
           ]
         ]
       }
