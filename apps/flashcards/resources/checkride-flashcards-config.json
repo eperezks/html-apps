@@ -1415,6 +1415,14 @@
           [
             "Bank Angle Classifications",
             "Shallow ~20, Medium ~20-40, Steep ~45+"
+          ],
+          [
+            "Induced Drag",
+            "Varies inversely with airspeed"
+          ],
+          [
+            "Parasite Drag",
+            "Varies directly with airspeed"
           ]
         ]
       }
